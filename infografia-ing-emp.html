@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería Empresarial en la Era Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .infographic-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            background: rgba(255, 255, 255, 0.7);
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .process-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .process-step {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            font-size: 2rem;
+            color: #3498db;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .highlight-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .tool-card h5 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid #3498db;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 200px;
+            }
+            
+            .process-flow {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-step::after {
+                content: '↓';
+                right: auto;
+                bottom: -25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ingeniería Empresarial en la Era Digital</h1>
+            <p>Fundamentos, Competencias y Estrategias Modernas | Octubre 2023</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('introduccion')">1. Introducción</button>
+            <button class="nav-btn" onclick="showSection('perfil')">2. Perfil del Ingeniero</button>
+            <button class="nav-btn" onclick="showSection('empresa')">3. Empresa Digital</button>
+            <button class="nav-btn" onclick="showSection('competencias')">4. Competencias</button>
+            <button class="nav-btn" onclick="showSection('proyecto')">5. Proyecto Integrador</button>
+        </div>
+
+        <!-- Sección 1: Introducción -->
+        <div class="content-section active" id="introduccion">
+            <h2 class="section-title">1. La Evolución de la Ingeniería y el Rol del Ingeniero Empresarial</h2>
+            
+            <div class="quote">
+                "La ingeniería es la aplicación del ingenio humano para resolver problemas prácticos y transformar el entorno"
+            </div>
+
+            <div class="infographic-grid">
+                <div class="info-card">
+                    <h3>🏛️ Ingeniería Clásica</h3>
+                    <p>Manipulación de materia y energía: pirámides, acueductos, máquinas de vapor</p>
+                </div>
+                <div class="info-card">
+                    <h3>💻 Ingeniería Moderna</h3>
+                    <p>Diseño y optimización de sistemas abstractos: procesos de negocio, modelos digitales, algoritmos</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Materias Primas del Ingeniero Empresarial</h4>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h5>📊 Datos</h5>
+                        <p>Información estructurada</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>👥 Capital Humano</h5>
+                        <p>Talento y conocimiento</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>💰 Recursos Financieros</h5>
+                        <p>Capital e inversión</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>⚙️ Procesos Organizacionales</h5>
+                        <p>Flujos de trabajo</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote">
+                "El ingeniero actual es el hombre de la tecnología, cuya función es aplicar el conocimiento científico y técnico para crear, construir y mejorar el mundo artificial en beneficio de la humanidad" - Aquiles Gay
+            </div>
+        </div>
+
+        <!-- Sección 2: Perfil del Ingeniero -->
+        <div class="content-section" id="perfil">
+            <h2 class="section-title">2. El Perfil del Ingeniero Moderno</h2>
+            
+            <div class="highlight-box">
+                <h4>🎯 Profesional en Forma de T</h4>
+                <p>Combina profundidad técnica (vertical) con amplitud de habilidades blandas (horizontal)</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>💪 Habilidades Duras</h4>
+                    <ul class="skill-list">
+                        <li>Programación</li>
+                        <li>Software especializado</li>
+                        <li>Análisis de datos</li>
+                        <li>Matemáticas avanzadas</li>
+                        <li>Evaluación de proyectos</li>
+                        <li>Gestión de riesgos</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>🧠 Habilidades Blandas</h4>
+                    <ul class="skill-list">
+                        <li>Pensamiento crítico</li>
+                        <li>Comunicación efectiva</li>
+                        <li>Trabajo en equipo</li>
+                        <li>Adaptabilidad</li>
+                        <li>Liderazgo</li>
+                        <li>Creatividad</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🤖 Dimensión Ética de la IA</h4>
+                <p>Nueva responsabilidad: asegurar que los sistemas funcionen de manera justa, transparente y en beneficio de la humanidad</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h5>⚖️ Responsabilidad</h5>
+                    <p>¿Quién responde por errores de IA?</p>
+                </div>
+                <div class="tool-card">
+                    <h5>🎭 Sesgo Algorítmico</h5>
+                    <p>Evitar replicar prejuicios</p>
+                </div>
+                <div class="tool-card">
+                    <h5>🔒 Privacidad</h5>
+                    <p>Protección de datos personales</p>
+                </div>
+                <div class="tool-card">
+                    <h5>👔 Impacto Laboral</h5>
+                    <p>Transformación del empleo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 3: Empresa Digital -->
+        <div class="content-section" id="empresa">
+            <h2 class="section-title">3. La Empresa en la Era Digital</h2>
+            
+            <div class="quote">
+                "La economía digital no es simplemente la economía tradicional con una capa de tecnología; representa un cambio de paradigma fundamental"
+            </div>
+
+            <div class="infographic-grid">
+                <div class="info-card">
+                    <h3>🌐 Hiperconectividad</h3>
+                    <p>Conexión global instantánea</p>
+                </div>
+                <div class="info-card">
+                    <h3>📚 Democratización</h3>
+                    <p>Acceso universal a información</p>
+                </div>
+                <div class="info-card">
+                    <h3>👑 Poder al Consumidor</h3>
+                    <p>Empresas centradas en el cliente</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🏗️ Componentes de la Economía Digital</h4>
+                <div class="process-flow">
+                    <div class="process-step">Infraestructura<br>💻</div>
+                    <div class="process-step">e-Business<br>⚙️</div>
+                    <div class="process-step">e-Commerce<br>🛒</div>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🚀 Innovación Organizacional</h4>
+                    <ul class="skill-list">
+                        <li>Clima de trabajo adecuado</li>
+                        <li>Recursos y herramientas</li>
+                        <li>Diversidad y colaboración</li>
+                        <li>Proceso sistematizado</li>
+                        <li>Liderazgo ejemplar</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>🛠️ Herramientas de Negocio</h4>
+                    <ul class="skill-list">
+                        <li>Business Model Canvas</li>
+                        <li>Lean Startup</li>
+                        <li>Design Thinking</li>
+                        <li>MVP (Producto Mínimo Viable)</li>
+                        <li>Lean Canvas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📈 Casos de Éxito</h4>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h5>🍕 Domino's Pizza</h5>
+                        <p>"Empresa de e-commerce que vende pizza"</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>👗 Zara (Inditex)</h5>
+                        <p>"Moda rápida impulsada por datos"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: Competencias -->
+        <div class="content-section" id="competencias">
+            <h2 class="section-title">4. Competencias Centrales del Ingeniero Empresarial</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>📋 Gestión de Proyectos</h4>
+                    <ul class="skill-list">
+                        <li>PMBOK® 6ª Ed: Enfoque predictivo</li>
+                        <li>PMBOK® 7ª Ed: Modelo flexible</li>
+                        <li>5 Grupos de Procesos</li>
+                        <li>10 Áreas de Conocimiento</li>
+                        <li>12 Principios de Dirección</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>⚙️ Gestión de Procesos (BPM)</h4>
+                    <ul class="skill-list">
+                        <li>Diseño de procesos</li>
+                        <li>Modelado y simulación</li>
+                        <li>Ejecución automatizada</li>
+                        <li>Monitoreo en tiempo real</li>
+                        <li>Optimización continua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔄 Ciclo de Vida BPM</h4>
+                <div class="process-flow">
+                    <div class="process-step">Diseñar<br>📐</div>
+                    <div class="process-step">Modelar<br>🎯</div>
+                    <div class="process-step">Ejecutar<br>▶️</div>
+                    <div class="process-step">Monitorear<br>📊</div>
+                    <div class="process-step">Optimizar<br>⚡</div>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>📊 Análisis Estratégico</h4>
+                    <ul class="skill-list">
+                        <li>Análisis FODA/SWOT</li>
+                        <li>BABOK® Framework</li>
+                        <li>50 técnicas de análisis</li>
+                        <li>Lluvia de ideas</li>
+                        <li>Análisis causa raíz</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>💻 Implementación de TI</h4>
+                    <ul class="skill-list">
+                        <li>Gestión del cambio</li>
+                        <li>Arquitectura de solución</li>
+                        <li>Pruebas rigurosas</li>
+                        <li>Despliegue estratégico</li>
+                        <li>Mantenimiento continuo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🏗️ Ciclo de Implementación TI</h4>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h5>1. Planificación</h5>
+                        <p>Análisis de requisitos</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>2. Diseño</h5>
+                        <p>Arquitectura de solución</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>3. Construcción</h5>
+                        <p>Desarrollo y configuración</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>4. Pruebas</h5>
+                        <p>Verificación rigurosa</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>5. Despliegue</h5>
+                        <p>Lanzamiento controlado</p>
+                    </div>
+                    <div class="tool-card">
+                        <h5>6. Mantenimiento</h5>
+                        <p>Soporte continuo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 5: Proyecto Integrador -->
+        <div class="content-section" id="proyecto">
+            <h2 class="section-title">5. Proyecto Integrador: De la Idea a la Propuesta Final</h2>
+            
+            <div class="highlight-box">
+                <h4>📋 Acta de Constitución del Proyecto</h4>
+                <p>Documento que autoriza formalmente la existencia del proyecto y define las reglas del juego</p>
+            </div>
+
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h5>🎯 Propósito</h5>
+                    <p>Justificación y objetivos</p>
+                </div>
+                <div class="tool-card">
+                    <h5>📏 Alcance</h5>
+                    <p>Límites y requisitos</p>
+                </div>
+                <div class="tool-card">
+                    <h5>⏰ Cronograma</h5>
+                    <p>Hitos principales</p>
+                </div>
+                <div class="tool-card">
+                    <h5>💰 Presupuesto</h5>
+                    <p>Recursos financieros</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔍 Estudio de Viabilidad</h4>
+                <p>Análisis riguroso para determinar si el proyecto es realizable y merece la inversión</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>📊 Dimensiones de Viabilidad</h4>
+                    <ul class="skill-list">
+                        <li>Técnica: ¿Tenemos la tecnología?</li>
+                        <li>Económica: ¿Es rentable?</li>
+                        <li>De Mercado: ¿Hay demanda?</li>
+                        <li>Operativa: ¿Podemos ejecutarlo?</li>
+                        <li>Legal: ¿Cumple normativas?</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>📈 Métricas Financieras</h4>
+                    <ul class="skill-list">
+                        <li>ROI (Retorno de Inversión)</li>
+                        <li>VAN (Valor Actual Neto)</li>
+                        <li>TIR (Tasa Interna Retorno)</li>
+                        <li>Análisis Costo-Beneficio</li>
+                        <li>Proyección de Ventas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📝 Estructura de Propuesta Final</h4>
+                <div class="process-flow">
+                    <div class="process-step">Resumen<br>Ejecutivo<br>📋</div>
+                    <div class="process-step">Problema<br>y Contexto<br>🎯</div>
+                    <div class="process-step">Solución<br>Propuesta<br>💡</div>
+                    <div class="process-step">Plan de<br>Implementación<br>🚀</div>
+                    <div class="process-step">Evaluación<br>y Cierre<br>✅</div>
+                </div>
+            </div>
+
+            <div class="quote">
+                "El ingeniero empresarial del siglo XXI es un integrador sistémico que combina la profundidad técnica con habilidades interpersonales y de negocio"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Activar el botón seleccionado
+            event.target.classList.add('active');
+
+            // Scroll suave hacia arriba
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Agregar efectos de hover adicionales
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card, .tool-card, .skill-category');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
