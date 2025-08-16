@@ -458,6 +458,9 @@
                 <button class="btn btn-success" onclick="exportData()">
                     💾 Exportar Datos
                 </button>
+                <button class="btn btn-danger" onclick="resetData()" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                    🔄 Restablecer a Valores por Defecto
+                </button>
             </div>
             
             <div id="sections-container" class="sections-container">
@@ -501,8 +504,10 @@
     <script>
         let isEditMode = false;
         const correctPassword = "Campeon#8";
+        const storageKey = "tallerInvestigacion1_data";
 
-        let courseData = {
+        // Datos por defecto
+        const defaultCourseData = {
             sections: [
                 {
                     id: 1,
@@ -546,6 +551,35 @@
                 }
             ]
         };
+
+        // Cargar datos desde localStorage o usar datos por defecto
+        let courseData = loadCourseData();
+
+        function loadCourseData() {
+            try {
+                const saved = localStorage.getItem(storageKey);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    // Verificar que los datos tienen la estructura correcta
+                    if (parsed && parsed.sections && Array.isArray(parsed.sections)) {
+                        return parsed;
+                    }
+                }
+            } catch (error) {
+                console.warn('Error cargando datos guardados:', error);
+            }
+            return JSON.parse(JSON.stringify(defaultCourseData)); // Copia profunda
+        }
+
+        function saveCourseData() {
+            try {
+                localStorage.setItem(storageKey, JSON.stringify(courseData));
+                console.log('Datos guardados exitosamente');
+            } catch (error) {
+                console.error('Error guardando datos:', error);
+                alert('Error al guardar los datos. Verifica que tu navegador permita almacenamiento local.');
+            }
+        }
 
         function setViewMode() {
             isEditMode = false;
@@ -702,6 +736,7 @@
             };
 
             courseData.sections.push(newSection);
+            saveCourseData();
             renderSections();
             closeModal();
         }
@@ -710,6 +745,7 @@
             if (!isEditMode) return;
             if (confirm('¿Estás seguro de que deseas eliminar esta sección?')) {
                 courseData.sections = courseData.sections.filter(section => section.id !== sectionId);
+                saveCourseData();
                 renderSections();
             }
         }
@@ -733,6 +769,7 @@
                 section[type].push({ name, url });
                 nameInput.value = '';
                 urlInput.value = '';
+                saveCourseData();
                 renderSections();
             }
         }
@@ -742,6 +779,7 @@
             const section = courseData.sections.find(s => s.id === sectionId);
             if (section) {
                 section[type].splice(index, 1);
+                saveCourseData();
                 renderSections();
             }
         }
@@ -756,6 +794,16 @@
             link.download = 'taller-investigacion-1.json';
             link.click();
             URL.revokeObjectURL(url);
+        }
+
+        function resetData() {
+            if (!isEditMode) return;
+            if (confirm('¿Estás seguro de que deseas restablecer todos los datos a los valores por defecto? Esta acción no se puede deshacer.')) {
+                courseData = JSON.parse(JSON.stringify(defaultCourseData));
+                saveCourseData();
+                renderSections();
+                alert('Datos restablecidos exitosamente');
+            }
         }
 
         // Event listeners
