@@ -1,1058 +1,306 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller de Investigación 1 - Gestor de Curso</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-
-        .header {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .mode-btn {
-            padding: 8px 16px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .mode-btn.active {
-            background: white;
-            color: #2c3e50;
-        }
-
-        .mode-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mode-btn.active:hover {
-            background: white;
-        }
-
-        .main-content {
-            padding: 30px;
-        }
-
-        .section-controls {
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #27ae60, #229954);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 8px 16px;
-            font-size: 12px;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .btn-link {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
-            color: white;
-            text-decoration: none;
-        }
-
-        .sections-container {
-            display: grid;
-            gap: 25px;
-        }
-
-        .section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border: 2px solid #f8f9fa;
-            transition: all 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border-color: #3498db;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        .section-title {
-            font-size: 1.5em;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-
-        .section-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        .materials-section, .practices-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #3498db;
-        }
-
-        .practices-section {
-            border-left-color: #27ae60;
-        }
-
-        .unit-container {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .unit-title {
-            font-size: 1.1em;
-            color: #495057;
-            margin-bottom: 12px;
-            font-weight: 600;
-            padding: 8px 12px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 6px;
-            border-left: 3px solid #6c757d;
-        }
-
-        .materials-section .unit-title {
-            border-left-color: #3498db;
-        }
-
-        .practices-section .unit-title {
-            border-left-color: #27ae60;
-        }
-
-        .practices-section {
-            border-left-color: #27ae60;
-        }
-
-        .subsection-title {
-            font-size: 1.2em;
-            color: #34495e;
-            margin-bottom: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .subsection-title::before {
-            content: "📚";
-            font-size: 1.2em;
-        }
-
-        .practices-section .subsection-title::before {
-            content: "🔬";
-        }
-
-        .material-list {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-
-        .material-item {
-            background: white;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.2s ease;
-        }
-
-        .material-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .material-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .material-details {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .material-name {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .material-url {
-            color: #7f8c8d;
-            font-size: 12px;
-            word-break: break-all;
-        }
-
-        .material-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .add-material-form {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border: 2px dashed #bdc3c7;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .material-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .material-input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            min-width: 400px;
-        }
-
-        .modal-header {
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #34495e;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-            justify-content: flex-end;
-        }
-
-        .edit-mode-only {
-            display: block;
-        }
-
-        .view-mode .edit-mode-only {
-            display: none;
-        }
-
-        .password-modal .modal-content {
-            text-align: center;
-            min-width: 300px;
-        }
-
-        .password-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 16px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        @media (max-width: 768px) {
-            .section-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .form-row {
-                flex-direction: column;
-            }
-            
-            .modal-content {
-                margin: 20px;
-                min-width: auto;
-                width: calc(100% - 40px);
-            }
-
-            .mode-toggle {
-                position: static;
-                justify-content: center;
-                margin-top: 15px;
-            }
-
-            .material-info {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .material-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
-
-        .empty-state {
-            text-align: center;
-            color: #7f8c8d;
-            font-style: italic;
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taller de Investigación 1 - Gestor de Curso</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .main-content {
+      padding: 30px;
+    }
+
+    .sections-container {
+      display: grid;
+      gap: 25px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      border: 2px solid #f8f9fa;
+      transition: all 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      border-color: #3498db;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ecf0f1;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    .subsection-title {
+      font-size: 1.2em;
+      color: #34495e;
+      margin-bottom: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subsection-title::before {
+      content: "📚";
+      font-size: 1.2em;
+    }
+
+    .practices-section .subsection-title::before {
+      content: "🔬";
+    }
+
+    .unit-container {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+
+    .unit-title {
+      font-size: 1.1em;
+      color: #495057;
+      margin-bottom: 12px;
+      font-weight: 600;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 6px;
+      border-left: 3px solid #6c757d;
+    }
+
+    .material-list {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+
+    .material-item {
+      background: white;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .material-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .material-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .material-details {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .material-name {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 14px;
+    }
+
+    .material-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-link {
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+    }
+
+    .btn-link.disabled {
+      background: gray;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="mode-toggle">
-                <button class="mode-btn active" onclick="setViewMode()">👁️ Visualización</button>
-                <button class="mode-btn" onclick="showPasswordModal()">✏️ Edición</button>
-            </div>
-            <h1>🎓 Taller de Investigación 1</h1>
-            <p>Sistema de Gestión de Materiales y Prácticas</p>
-        </div>
-        
-        <div class="main-content">
-            <div class="section-controls edit-mode-only">
-                <button class="btn btn-primary" onclick="showAddSectionModal()">
-                    ➕ Agregar Nueva Sección
-                </button>
-                <button class="btn btn-success" onclick="exportData()">
-                    💾 Exportar Datos
-                </button>
-                <button class="btn btn-danger" onclick="resetData()" style="background: linear-gradient(135deg, #e67e22, #d35400);">
-                    🔄 Restablecer a Valores por Defecto
-                </button>
-            </div>
-            
-            <div id="sections-container" class="sections-container">
-                <!-- Las secciones se generarán dinámicamente -->
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>🎓 Taller de Investigación 1</h1>
+      <p>Sistema de Gestión de Materiales y Prácticas</p>
     </div>
 
-    <!-- Modal para contraseña -->
-    <div id="passwordModal" class="modal password-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">🔒 Acceso al Modo Edición</h3>
-                <p>Ingrese la contraseña para acceder al modo edición</p>
-            </div>
-            <input type="password" id="passwordInput" class="password-input" placeholder="Contraseña">
-            <div class="modal-actions">
-                <button class="btn btn-primary" onclick="checkPassword()">Ingresar</button>
-                <button class="btn btn-danger" onclick="closePasswordModal()">Cancelar</button>
-            </div>
-        </div>
+    <div class="main-content">
+      <div id="sections-container" class="sections-container"></div>
     </div>
+  </div>
 
-    <!-- Modal para agregar sección -->
-    <div id="addSectionModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Agregar Nueva Sección</h3>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Nombre de la Sección:</label>
-                <input type="text" id="sectionNameInput" class="form-input" placeholder="Ej: Marco Teórico">
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-primary" onclick="addSection()">Agregar</button>
-                <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let isEditMode = false;
-        const correctPassword = "Campeon#8";
-        const storageKey = "tallerInvestigacion1_data";
-
-        // Datos por defecto
-        const defaultCourseData = {
-            sections: [
-                {
-                    id: 1,
-                    name: "Taller de investigación I",
-                    materials: {
-                        unidad1: [
-                            {
-                                name: "Semana 01: Líneas de investigación y detección de problemas",
-                                url: "https://1drv.ms/b/c/6a3e014cfc3ac3fa/EdB5_4jvLExClhOkWqACxzQBTPQg0l0FrUy-RFsU3hD19A?e=YxdGm4"
-                            },
-                            {
-                                name: "Semana 02: Selección y delimitación del problema",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 03: Revisión de fuentes y normas APA",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 04: Sistematización y formulación del problema",
-                                url: ""
-                            }
-                        ],
-                        unidad2: [
-                            {
-                                name: "Semana 05: Estructura del proyecto y delimitación del estudio",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 06: Objetivos y coherencia interna",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 07: Justificación del estudio",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 08: Marco teórico: bases, antecedentes y conceptos",
-                                url: ""
-                            }
-                        ],
-                        unidad3: [
-                            {
-                                name: "Semana 09: Hipótesis y relaciones entre variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 10: Identificación y operacionalización de variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 11: Diseño metodológico y muestreo",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 12: Técnicas de recolección y plan de análisis",
-                                url: ""
-                            }
-                        ],
-                        unidad4: [
-                            {
-                                name: "Semana 13: Hipótesis y relaciones entre variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 14: Identificación y operacionalización de variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 15: Diseño metodológico y muestreo",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 16: Técnicas de recolección y plan de análisis",
-                                url: ""
-                            }
-                        ]
-                    },
-                    practices: {
-                        unidad1: [
-                            {
-                                name: "Semana 01: Líneas de investigación y detección de problemas",
-                                url: ""
-                            }/*,
-                            {
-                                name: "Semana 02: Selección y delimitación del problema",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 03: Revisión de fuentes y normas APA",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 04: Sistematización y formulación del problema",
-                                url: ""
-                            }*/
-                        ]/*,
-                        unidad2: [
-                            {
-                                name: "Semana 05: Estructura del proyecto y delimitación del estudio",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 06: Objetivos y coherencia interna",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 07: Justificación del estudio",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 08: Marco teórico: bases, antecedentes y conceptos",
-                                url: ""
-                            }
-                        ],
-                        unidad3: [
-                            {
-                                name: "Semana 09: Hipótesis y relaciones entre variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 10: Identificación y operacionalización de variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 11: Diseño metodológico y muestreo",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 12: Técnicas de recolección y plan de análisis",
-                                url: ""
-                            }
-                        ],
-                        unidad4: [
-                            {
-                                name: "Semana 13: Hipótesis y relaciones entre variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 14: Identificación y operacionalización de variables",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 15: Diseño metodológico y muestreo",
-                                url: ""
-                            },
-                            {
-                                name: "Semana 16: Técnicas de recolección y plan de análisis",
-                                url: ""
-                            }
-                        ]*/
-                    }
-                }
+  <script>
+    // Datos del curso
+    const courseData = {
+      sections: [
+        {
+          id: 1,
+          name: "Taller de investigación I",
+          materials: {
+            unidad1: [
+              {
+                name: "Semana 01: Líneas de investigación y detección de problemas",
+                url: "https://1drv.ms/b/c/6a3e014cfc3ac3fa/EdB5_4jvLExClhOkWqACxzQBTPQg0l0FrUy-RFsU3hD19A?e=YxdGm4"
+              },
+              {
+                name: "Semana 02: Selección y delimitación del problema",
+                url: ""
+              }
             ]
-        };
-
-        // Cargar datos desde localStorage o usar datos por defecto
-        let courseData = loadCourseData();
-
-        function loadCourseData() {
-            try {
-                const saved = localStorage.getItem(storageKey);
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    // Verificar que los datos tienen la estructura correcta
-                    if (parsed && parsed.sections && Array.isArray(parsed.sections)) {
-                        // Migrar datos antiguos si es necesario
-                        const migratedData = migrateOldData(parsed);
-                        return migratedData;
-                    }
-                }
-            } catch (error) {
-                console.warn('Error cargando datos guardados:', error);
-            }
-            return JSON.parse(JSON.stringify(defaultCourseData)); // Copia profunda
+          },
+          practices: {
+            unidad1: [
+              {
+                name: "Práctica 01: Análisis de un problema de investigación",
+                url: ""
+              },
+              {
+                name: "Práctica 02: Revisión de fuentes",
+                url: "https://example.com/practica2"
+              }
+            ]
+          }
         }
+      ]
+    };
 
-        function migrateOldData(data) {
-            // Función para migrar datos del formato anterior al nuevo formato con unidades
-            const migrated = JSON.parse(JSON.stringify(data));
-            
-            migrated.sections.forEach(section => {
-                // Si los materiales están en formato array (formato anterior)
-                if (Array.isArray(section.materials)) {
-                    const oldMaterials = section.materials;
-                    section.materials = {
-                        unidad1: [],
-                        unidad2: [],
-                        unidad3: [],
-                        unidad4: []
-                    };
-                    // Distribuir los materiales existentes en la unidad 1
-                    if (oldMaterials.length > 0) {
-                        section.materials.unidad1 = oldMaterials;
-                    }
-                }
-                
-                // Si las prácticas están en formato array (formato anterior)
-                if (Array.isArray(section.practices)) {
-                    const oldPractices = section.practices;
-                    section.practices = {
-                        unidad1: [],
-                        unidad2: [],
-                        unidad3: [],
-                        unidad4: []
-                    };
-                    // Distribuir las prácticas existentes en la unidad 1
-                    if (oldPractices.length > 0) {
-                        section.practices.unidad1 = oldPractices;
-                    }
-                }
-                
-                // Asegurar que todas las unidades existan
-                ['materials', 'practices'].forEach(type => {
-                    if (!section[type] || typeof section[type] !== 'object') {
-                        section[type] = {
-                            unidad1: [],
-                            unidad2: [],
-                            unidad3: [],
-                            unidad4: []
-                        };
-                    } else {
-                        // Asegurar que todas las unidades existan
-                        for (let i = 1; i <= 4; i++) {
-                            const unidadKey = `unidad${i}`;
-                            if (!Array.isArray(section[type][unidadKey])) {
-                                section[type][unidadKey] = [];
-                            }
-                        }
-                    }
-                });
-            });
-            
-            return migrated;
-        }
+    function renderSections() {
+      const container = document.getElementById('sections-container');
+      container.innerHTML = '';
 
-        function saveCourseData() {
-            try {
-                localStorage.setItem(storageKey, JSON.stringify(courseData));
-                console.log('Datos guardados exitosamente');
-            } catch (error) {
-                console.error('Error guardando datos:', error);
-                alert('Error al guardar los datos. Verifica que tu navegador permita almacenamiento local.');
-            }
-        }
+      courseData.sections.forEach(section => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section';
 
-        function setViewMode() {
-            isEditMode = false;
-            document.body.className = 'view-mode';
-            updateModeButtons();
-        }
+        const materialsHtml = createUnitsHtml(section.id, 'materials', section.materials);
+        const practicesHtml = createUnitsHtml(section.id, 'practices', section.practices);
 
-        function setEditMode() {
-            isEditMode = true;
-            document.body.className = 'edit-mode';
-            updateModeButtons();
-        }
+        sectionDiv.innerHTML = `
+          <div class="section-header">
+            <h3 class="section-title">${section.name}</h3>
+          </div>
+          <div class="section-content">
+            <div class="materials-section">
+              <h4 class="subsection-title">Materiales del Curso</h4>
+              ${materialsHtml}
+            </div>
+            <div class="practices-section">
+              <h4 class="subsection-title">Casos Prácticos</h4>
+              ${practicesHtml}
+            </div>
+          </div>
+        `;
+        container.appendChild(sectionDiv);
+      });
+    }
 
-        function updateModeButtons() {
-            const buttons = document.querySelectorAll('.mode-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            if (isEditMode) {
-                buttons[1].classList.add('active');
-            } else {
-                buttons[0].classList.add('active');
-            }
-        }
+    function createUnitsHtml(sectionId, type, unitsData) {
+      let html = '';
 
-        function showPasswordModal() {
-            document.getElementById('passwordModal').style.display = 'block';
-            document.getElementById('passwordInput').focus();
-        }
+      for (let i = 1; i <= 4; i++) {
+        const unidadKey = `unidad${i}`;
+        const items = (unitsData && unitsData[unidadKey]) || [];
 
-        function closePasswordModal() {
-            document.getElementById('passwordModal').style.display = 'none';
-            document.getElementById('passwordInput').value = '';
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === correctPassword) {
-                setEditMode();
-                closePasswordModal();
-                renderSections();
-            } else {
-                alert('Contraseña incorrecta');
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
-            }
-        }
-
-        function renderSections() {
-            const container = document.getElementById('sections-container');
-            container.innerHTML = '';
-
-            if (courseData.sections.length === 0) {
-                container.innerHTML = '<div class="empty-state">No hay secciones creadas. ¡Agrega tu primera sección!</div>';
-                return;
-            }
-
-            courseData.sections.forEach(section => {
-                const sectionElement = createSectionElement(section);
-                container.appendChild(sectionElement);
-            });
-        }
-
-        function createSectionElement(section) {
-            const sectionDiv = document.createElement('div');
-            sectionDiv.className = 'section';
-            
-            const materialsHtml = createUnitsHtml(section.id, 'materials', section.materials);
-            const practicesHtml = createUnitsHtml(section.id, 'practices', section.practices);
-            
-            sectionDiv.innerHTML = `
-                <div class="section-header">
-                    <h3 class="section-title">${section.name}</h3>
-                    <button class="btn btn-danger edit-mode-only" onclick="deleteSection(${section.id})">🗑️ Eliminar</button>
-                </div>
-                <div class="section-content">
-                    <div class="materials-section">
-                        <h4 class="subsection-title">Materiales del Curso</h4>
-                        ${materialsHtml}
+        html += `
+          <div class="unit-container">
+            <h5 class="unit-title">📖 Unidad ${i}</h5>
+            <ul class="material-list">
+              ${items.map(item => `
+                <li class="material-item">
+                  <div class="material-info">
+                    <div class="material-details">
+                      <div class="material-name">${item.name}</div>
                     </div>
-                    <div class="practices-section">
-                        <h4 class="subsection-title">Casos prácticos</h4>
-                        ${practicesHtml}
+                    <div class="material-actions">
+                      ${item.url 
+                        ? `<a href="${item.url}" target="_blank" class="btn-link">📥 Acceder</a>` 
+                        : `<span class="btn-link disabled">📥 Acceder</span>`}
                     </div>
-                </div>
-            `;
-            return sectionDiv;
-        }
+                  </div>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      }
+      return html;
+    }
 
-        function createUnitsHtml(sectionId, type, unitsData) {
-            let html = '';
-            
-            for (let i = 1; i <= 4; i++) {
-                const unidadKey = `unidad${i}`;
-                const items = unitsData[unidadKey] || [];
-                
-                html += `
-                    <div class="unit-container">
-                        <h5 class="unit-title">📖 Unidad ${i}</h5>
-                        <ul class="material-list" id="${type}-${unidadKey}-${sectionId}">
-                            ${items.map((item, index) => `
-                                <li class="material-item">
-                                    <div class="material-info">
-                                        <div class="material-details">
-                                            <div class="material-name">${item.name}</div>
-                                            <div class="material-url">${item.url}</div>
-                                        </div>
-                                        <div class="material-actions">
-                                            <a href="${item.url}" target="_blank" class="btn-link">📥 Acceder</a>
-                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${sectionId}, '${type}', '${unidadKey}', ${index})">✖</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <div class="add-material-form edit-mode-only">
-                            <div class="form-row">
-                                <input type="text" class="material-input" placeholder="Nombre del ${type === 'materials' ? 'material' : 'práctica'}" id="${type}-name-${unidadKey}-${sectionId}">
-                                <input type="url" class="material-input" placeholder="https://ejemplo.com/${type === 'materials' ? 'material' : 'practica'}" id="${type}-url-${unidadKey}-${sectionId}">
-                            </div>
-                            <button class="btn btn-success" onclick="addMaterial(${sectionId}, '${type}', '${unidadKey}')">➕ Agregar ${type === 'materials' ? 'Material' : 'Práctica'}</button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            return html;
-        }
-
-        function showAddSectionModal() {
-            if (!isEditMode) return;
-            document.getElementById('addSectionModal').style.display = 'block';
-            document.getElementById('sectionNameInput').focus();
-        }
-
-        function closeModal() {
-            document.getElementById('addSectionModal').style.display = 'none';
-            document.getElementById('sectionNameInput').value = '';
-        }
-
-        function addSection() {
-            const nameInput = document.getElementById('sectionNameInput');
-            const name = nameInput.value.trim();
-            
-            if (!name) {
-                alert('Por favor, ingresa un nombre para la sección');
-                return;
-            }
-
-            const newSection = {
-                id: Date.now(),
-                name: name,
-                materials: {
-                    unidad1: [],
-                    unidad2: [],
-                    unidad3: [],
-                    unidad4: []
-                },
-                practices: {
-                    unidad1: [],
-                    unidad2: [],
-                    unidad3: [],
-                    unidad4: []
-                }
-            };
-
-            courseData.sections.push(newSection);
-            saveCourseData();
-            renderSections();
-            closeModal();
-        }
-
-        function deleteSection(sectionId) {
-            if (!isEditMode) return;
-            if (confirm('¿Estás seguro de que deseas eliminar esta sección?')) {
-                courseData.sections = courseData.sections.filter(section => section.id !== sectionId);
-                saveCourseData();
-                renderSections();
-            }
-        }
-
-        function addMaterial(sectionId, type, unidad) {
-            if (!isEditMode) return;
-            
-            const nameInput = document.getElementById(`${type}-name-${unidad}-${sectionId}`);
-            const urlInput = document.getElementById(`${type}-url-${unidad}-${sectionId}`);
-            
-            const name = nameInput.value.trim();
-            const url = urlInput.value.trim();
-            
-            if (!name || !url) {
-                alert('Por favor, ingresa tanto el nombre como la URL');
-                return;
-            }
-
-            const section = courseData.sections.find(s => s.id === sectionId);
-            if (section) {
-                if (!section[type][unidad]) {
-                    section[type][unidad] = [];
-                }
-                section[type][unidad].push({ name, url });
-                nameInput.value = '';
-                urlInput.value = '';
-                saveCourseData();
-                renderSections();
-            }
-        }
-
-        function removeMaterial(sectionId, type, unidad, index) {
-            if (!isEditMode) return;
-            const section = courseData.sections.find(s => s.id === sectionId);
-            if (section && section[type][unidad]) {
-                section[type][unidad].splice(index, 1);
-                saveCourseData();
-                renderSections();
-            }
-        }
-
-        function exportData() {
-            if (!isEditMode) return;
-            const dataStr = JSON.stringify(courseData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'taller-investigacion-1.json';
-            link.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function resetData() {
-            if (!isEditMode) return;
-            if (confirm('¿Estás seguro de que deseas restablecer todos los datos a los valores por defecto? Esta acción no se puede deshacer.')) {
-                courseData = JSON.parse(JSON.stringify(defaultCourseData));
-                saveCourseData();
-                renderSections();
-                alert('Datos restablecidos exitosamente');
-            }
-        }
-
-        // Event listeners
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                closePasswordModal();
-            }
-        });
-
-        document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                if (e.target.id === 'passwordInput') {
-                    checkPassword();
-                } else if (e.target.id === 'sectionNameInput') {
-                    addSection();
-                }
-            }
-        });
-
-        // Cerrar modales al hacer clic fuera
-        document.getElementById('addSectionModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        document.getElementById('passwordModal').addEventListener('click', function(e) {
-            if (e.target === this) closePasswordModal();
-        });
-
-        // Inicializar la aplicación en modo visualización
-        setViewMode();
-        renderSections();
-    </script>
+    renderSections();
+  </script>
 </body>
 </html>
