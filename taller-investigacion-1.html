@@ -86,6 +86,28 @@
       font-weight: 700;
     }
 
+    .toggle-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .toggle-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: #ecf0f1;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn.active {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+
     .subsection-title {
       font-size: 1.2em;
       color: #34495e;
@@ -99,10 +121,6 @@
     .subsection-title::before {
       content: "📚";
       font-size: 1.2em;
-    }
-
-    .practices-section .subsection-title::before {
-      content: "🔬";
     }
 
     .unit-container {
@@ -238,6 +256,8 @@
       ]
     };
 
+    let activeType = 'materials'; // por defecto se muestran los materiales
+
     function renderSections() {
       const container = document.getElementById('sections-container');
       container.innerHTML = '';
@@ -246,21 +266,20 @@
         const sectionDiv = document.createElement('div');
         sectionDiv.className = 'section';
 
-        const materialsHtml = createUnitsHtml(section.id, 'materials', section.materials);
-        const practicesHtml = createUnitsHtml(section.id, 'practices', section.practices);
+        const unitsHtml = createUnitsHtml(section.id, activeType, section[activeType]);
 
         sectionDiv.innerHTML = `
           <div class="section-header">
             <h3 class="section-title">${section.name}</h3>
+            <div class="toggle-buttons">
+              <button class="toggle-btn ${activeType === 'materials' ? 'active' : ''}" onclick="switchType('materials')">Material</button>
+              <button class="toggle-btn ${activeType === 'practices' ? 'active' : ''}" onclick="switchType('practices')">Práctica</button>
+            </div>
           </div>
           <div class="section-content">
             <div class="materials-section">
-              <h4 class="subsection-title">Materiales del Curso</h4>
-              ${materialsHtml}
-            </div>
-            <div class="practices-section">
-              <h4 class="subsection-title">Casos Prácticos</h4>
-              ${practicesHtml}
+              <h4 class="subsection-title">${activeType === 'materials' ? 'Materiales del Curso' : 'Prácticas del Curso'}</h4>
+              ${unitsHtml}
             </div>
           </div>
         `;
@@ -298,6 +317,11 @@
         `;
       }
       return html;
+    }
+
+    function switchType(type) {
+      activeType = type;
+      renderSections();
     }
 
     renderSections();
