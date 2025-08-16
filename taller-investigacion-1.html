@@ -207,6 +207,37 @@
             border-left-color: #27ae60;
         }
 
+        .unit-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .unit-title {
+            font-size: 1.1em;
+            color: #495057;
+            margin-bottom: 12px;
+            font-weight: 600;
+            padding: 8px 12px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 6px;
+            border-left: 3px solid #6c757d;
+        }
+
+        .materials-section .unit-title {
+            border-left-color: #3498db;
+        }
+
+        .practices-section .unit-title {
+            border-left-color: #27ae60;
+        }
+
+        .practices-section {
+            border-left-color: #27ae60;
+        }
+
         .subsection-title {
             font-size: 1.2em;
             color: #34495e;
@@ -511,43 +542,155 @@
             sections: [
                 {
                     id: 1,
-                    name: "Fundamentos de la Investigación",
-                    materials: [
-                        {
-                            name: "Metodología de la Investigación - Hernández Sampieri",
-                            url: "https://ejemplo.com/hernandez-sampieri-metodologia"
-                        },
-                        {
-                            name: "Guía de Investigación Científica",
-                            url: "https://ejemplo.com/guia-investigacion-cientifica"
-                        }
-                    ],
-                    practices: [
-                        {
-                            name: "Práctica 1: Identificación de Problemas de Investigación",
-                            url: "https://ejemplo.com/practica-1-problemas"
-                        },
-                        {
-                            name: "Ejercicio: Formulación de Hipótesis",
-                            url: "https://ejemplo.com/ejercicio-hipotesis"
-                        }
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Diseño de Investigación",
-                    materials: [
-                        {
-                            name: "Tipos de Diseño de Investigación",
-                            url: "https://ejemplo.com/tipos-diseno-investigacion"
-                        }
-                    ],
-                    practices: [
-                        {
-                            name: "Práctica 2: Diseño de un Proyecto de Investigación",
-                            url: "https://ejemplo.com/practica-diseno-proyecto"
-                        }
-                    ]
+                    name: "Taller de investigación I",
+                    materials: {
+                        unidad1: [
+                            {
+                                name: "Semana 01: Líneas de investigación y detección de problemas",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 02: Selección y delimitación del problema",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 03: Revisión de fuentes y normas APA",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 04: Sistematización y formulación del problema",
+                                url: ""
+                            }
+                        ],
+                        unidad2: [
+                            {
+                                name: "Semana 05: Estructura del proyecto y delimitación del estudio",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 06: Objetivos y coherencia interna",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 07: Justificación del estudio",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 08: Marco teórico: bases, antecedentes y conceptos",
+                                url: ""
+                            }
+                        ],
+                        unidad3: [
+                            {
+                                name: "Semana 09: Hipótesis y relaciones entre variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 10: Identificación y operacionalización de variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 11: Diseño metodológico y muestreo",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 12: Técnicas de recolección y plan de análisis",
+                                url: ""
+                            }
+                        ],
+                        unidad4: [
+                            {
+                                name: "Semana 13: Hipótesis y relaciones entre variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 14: Identificación y operacionalización de variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 15: Diseño metodológico y muestreo",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 16: Técnicas de recolección y plan de análisis",
+                                url: ""
+                            }
+                        ]
+                    },
+                    practices: {
+                        unidad1: [
+                            {
+                                name: "Semana 01: Líneas de investigación y detección de problemas",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 02: Selección y delimitación del problema",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 03: Revisión de fuentes y normas APA",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 04: Sistematización y formulación del problema",
+                                url: ""
+                            }
+                        ],
+                        unidad2: [
+                            {
+                                name: "Semana 05: Estructura del proyecto y delimitación del estudio",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 06: Objetivos y coherencia interna",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 07: Justificación del estudio",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 08: Marco teórico: bases, antecedentes y conceptos",
+                                url: ""
+                            }
+                        ],
+                        unidad3: [
+                            {
+                                name: "Semana 09: Hipótesis y relaciones entre variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 10: Identificación y operacionalización de variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 11: Diseño metodológico y muestreo",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 12: Técnicas de recolección y plan de análisis",
+                                url: ""
+                            }
+                        ],
+                        unidad4: [
+                            {
+                                name: "Semana 13: Hipótesis y relaciones entre variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 14: Identificación y operacionalización de variables",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 15: Diseño metodológico y muestreo",
+                                url: ""
+                            },
+                            {
+                                name: "Semana 16: Técnicas de recolección y plan de análisis",
+                                url: ""
+                            }
+                        ]
+                    }
                 }
             ]
         };
@@ -562,13 +705,74 @@
                     const parsed = JSON.parse(saved);
                     // Verificar que los datos tienen la estructura correcta
                     if (parsed && parsed.sections && Array.isArray(parsed.sections)) {
-                        return parsed;
+                        // Migrar datos antiguos si es necesario
+                        const migratedData = migrateOldData(parsed);
+                        return migratedData;
                     }
                 }
             } catch (error) {
                 console.warn('Error cargando datos guardados:', error);
             }
             return JSON.parse(JSON.stringify(defaultCourseData)); // Copia profunda
+        }
+
+        function migrateOldData(data) {
+            // Función para migrar datos del formato anterior al nuevo formato con unidades
+            const migrated = JSON.parse(JSON.stringify(data));
+            
+            migrated.sections.forEach(section => {
+                // Si los materiales están en formato array (formato anterior)
+                if (Array.isArray(section.materials)) {
+                    const oldMaterials = section.materials;
+                    section.materials = {
+                        unidad1: [],
+                        unidad2: [],
+                        unidad3: [],
+                        unidad4: []
+                    };
+                    // Distribuir los materiales existentes en la unidad 1
+                    if (oldMaterials.length > 0) {
+                        section.materials.unidad1 = oldMaterials;
+                    }
+                }
+                
+                // Si las prácticas están en formato array (formato anterior)
+                if (Array.isArray(section.practices)) {
+                    const oldPractices = section.practices;
+                    section.practices = {
+                        unidad1: [],
+                        unidad2: [],
+                        unidad3: [],
+                        unidad4: []
+                    };
+                    // Distribuir las prácticas existentes en la unidad 1
+                    if (oldPractices.length > 0) {
+                        section.practices.unidad1 = oldPractices;
+                    }
+                }
+                
+                // Asegurar que todas las unidades existan
+                ['materials', 'practices'].forEach(type => {
+                    if (!section[type] || typeof section[type] !== 'object') {
+                        section[type] = {
+                            unidad1: [],
+                            unidad2: [],
+                            unidad3: [],
+                            unidad4: []
+                        };
+                    } else {
+                        // Asegurar que todas las unidades existan
+                        for (let i = 1; i <= 4; i++) {
+                            const unidadKey = `unidad${i}`;
+                            if (!Array.isArray(section[type][unidadKey])) {
+                                section[type][unidadKey] = [];
+                            }
+                        }
+                    }
+                });
+            });
+            
+            return migrated;
         }
 
         function saveCourseData() {
@@ -645,6 +849,10 @@
         function createSectionElement(section) {
             const sectionDiv = document.createElement('div');
             sectionDiv.className = 'section';
+            
+            const materialsHtml = createUnitsHtml(section.id, 'materials', section.materials);
+            const practicesHtml = createUnitsHtml(section.id, 'practices', section.practices);
+            
             sectionDiv.innerHTML = `
                 <div class="section-header">
                     <h3 class="section-title">${section.name}</h3>
@@ -653,59 +861,55 @@
                 <div class="section-content">
                     <div class="materials-section">
                         <h4 class="subsection-title">Materiales del Curso</h4>
-                        <ul class="material-list" id="materials-${section.id}">
-                            ${section.materials.map((material, index) => `
-                                <li class="material-item">
-                                    <div class="material-info">
-                                        <div class="material-details">
-                                            <div class="material-name">${material.name}</div>
-                                            <div class="material-url">${material.url}</div>
-                                        </div>
-                                        <div class="material-actions">
-                                            <a href="${material.url}" target="_blank" class="btn-link">📥 Acceder</a>
-                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${section.id}, 'materials', ${index})">✖</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <div class="add-material-form edit-mode-only">
-                            <div class="form-row">
-                                <input type="text" class="material-input" placeholder="Nombre del material" id="material-name-${section.id}">
-                                <input type="url" class="material-input" placeholder="https://ejemplo.com/material" id="material-url-${section.id}">
-                            </div>
-                            <button class="btn btn-success" onclick="addMaterial(${section.id}, 'materials')">➕ Agregar Material</button>
-                        </div>
+                        ${materialsHtml}
                     </div>
                     <div class="practices-section">
                         <h4 class="subsection-title">Prácticas</h4>
-                        <ul class="material-list" id="practices-${section.id}">
-                            ${section.practices.map((practice, index) => `
-                                <li class="material-item">
-                                    <div class="material-info">
-                                        <div class="material-details">
-                                            <div class="material-name">${practice.name}</div>
-                                            <div class="material-url">${practice.url}</div>
-                                        </div>
-                                        <div class="material-actions">
-                                            <a href="${practice.url}" target="_blank" class="btn-link">📥 Acceder</a>
-                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${section.id}, 'practices', ${index})">✖</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            `).join('')}
-                        </ul>
-                        <div class="add-material-form edit-mode-only">
-                            <div class="form-row">
-                                <input type="text" class="material-input" placeholder="Nombre de la práctica" id="practice-name-${section.id}">
-                                <input type="url" class="material-input" placeholder="https://ejemplo.com/practica" id="practice-url-${section.id}">
-                            </div>
-                            <button class="btn btn-success" onclick="addMaterial(${section.id}, 'practices')">➕ Agregar Práctica</button>
-                        </div>
+                        ${practicesHtml}
                     </div>
                 </div>
             `;
             return sectionDiv;
+        }
+
+        function createUnitsHtml(sectionId, type, unitsData) {
+            let html = '';
+            
+            for (let i = 1; i <= 4; i++) {
+                const unidadKey = `unidad${i}`;
+                const items = unitsData[unidadKey] || [];
+                
+                html += `
+                    <div class="unit-container">
+                        <h5 class="unit-title">📖 Unidad ${i}</h5>
+                        <ul class="material-list" id="${type}-${unidadKey}-${sectionId}">
+                            ${items.map((item, index) => `
+                                <li class="material-item">
+                                    <div class="material-info">
+                                        <div class="material-details">
+                                            <div class="material-name">${item.name}</div>
+                                            <div class="material-url">${item.url}</div>
+                                        </div>
+                                        <div class="material-actions">
+                                            <a href="${item.url}" target="_blank" class="btn-link">📥 Acceder</a>
+                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${sectionId}, '${type}', '${unidadKey}', ${index})">✖</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div class="add-material-form edit-mode-only">
+                            <div class="form-row">
+                                <input type="text" class="material-input" placeholder="Nombre del ${type === 'materials' ? 'material' : 'práctica'}" id="${type}-name-${unidadKey}-${sectionId}">
+                                <input type="url" class="material-input" placeholder="https://ejemplo.com/${type === 'materials' ? 'material' : 'practica'}" id="${type}-url-${unidadKey}-${sectionId}">
+                            </div>
+                            <button class="btn btn-success" onclick="addMaterial(${sectionId}, '${type}', '${unidadKey}')">➕ Agregar ${type === 'materials' ? 'Material' : 'Práctica'}</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
         }
 
         function showAddSectionModal() {
@@ -731,8 +935,18 @@
             const newSection = {
                 id: Date.now(),
                 name: name,
-                materials: [],
-                practices: []
+                materials: {
+                    unidad1: [],
+                    unidad2: [],
+                    unidad3: [],
+                    unidad4: []
+                },
+                practices: {
+                    unidad1: [],
+                    unidad2: [],
+                    unidad3: [],
+                    unidad4: []
+                }
             };
 
             courseData.sections.push(newSection);
@@ -750,11 +964,11 @@
             }
         }
 
-        function addMaterial(sectionId, type) {
+        function addMaterial(sectionId, type, unidad) {
             if (!isEditMode) return;
             
-            const nameInput = document.getElementById(`${type === 'materials' ? 'material' : 'practice'}-name-${sectionId}`);
-            const urlInput = document.getElementById(`${type === 'materials' ? 'material' : 'practice'}-url-${sectionId}`);
+            const nameInput = document.getElementById(`${type}-name-${unidad}-${sectionId}`);
+            const urlInput = document.getElementById(`${type}-url-${unidad}-${sectionId}`);
             
             const name = nameInput.value.trim();
             const url = urlInput.value.trim();
@@ -766,7 +980,10 @@
 
             const section = courseData.sections.find(s => s.id === sectionId);
             if (section) {
-                section[type].push({ name, url });
+                if (!section[type][unidad]) {
+                    section[type][unidad] = [];
+                }
+                section[type][unidad].push({ name, url });
                 nameInput.value = '';
                 urlInput.value = '';
                 saveCourseData();
@@ -774,11 +991,11 @@
             }
         }
 
-        function removeMaterial(sectionId, type, index) {
+        function removeMaterial(sectionId, type, unidad, index) {
             if (!isEditMode) return;
             const section = courseData.sections.find(s => s.id === sectionId);
-            if (section) {
-                section[type].splice(index, 1);
+            if (section && section[type][unidad]) {
+                section[type][unidad].splice(index, 1);
                 saveCourseData();
                 renderSections();
             }
