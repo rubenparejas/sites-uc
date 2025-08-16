@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Investigación 1 - Gestor de Curso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: #2c3e50;
+        }
+
+        .mode-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mode-btn.active:hover {
+            background: white;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .section-controls {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-link {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .sections-container {
+            display: grid;
+            gap: 25px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: #3498db;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .section-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .materials-section, .practices-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+        }
+
+        .practices-section {
+            border-left-color: #27ae60;
+        }
+
+        .subsection-title {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subsection-title::before {
+            content: "📚";
+            font-size: 1.2em;
+        }
+
+        .practices-section .subsection-title::before {
+            content: "🔬";
+        }
+
+        .material-list {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .material-item {
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .material-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .material-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .material-details {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .material-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .material-url {
+            color: #7f8c8d;
+            font-size: 12px;
+            word-break: break-all;
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .add-material-form {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px dashed #bdc3c7;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .material-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .material-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            min-width: 400px;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .edit-mode-only {
+            display: block;
+        }
+
+        .view-mode .edit-mode-only {
+            display: none;
+        }
+
+        .password-modal .modal-content {
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                margin: 20px;
+                min-width: auto;
+                width: calc(100% - 40px);
+            }
+
+            .mode-toggle {
+                position: static;
+                justify-content: center;
+                margin-top: 15px;
+            }
+
+            .material-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .material-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="mode-toggle">
+                <button class="mode-btn active" onclick="setViewMode()">👁️ Visualización</button>
+                <button class="mode-btn" onclick="showPasswordModal()">✏️ Edición</button>
+            </div>
+            <h1>🎓 Taller de Investigación 1</h1>
+            <p>Sistema de Gestión de Materiales y Prácticas</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="section-controls edit-mode-only">
+                <button class="btn btn-primary" onclick="showAddSectionModal()">
+                    ➕ Agregar Nueva Sección
+                </button>
+                <button class="btn btn-success" onclick="exportData()">
+                    💾 Exportar Datos
+                </button>
+            </div>
+            
+            <div id="sections-container" class="sections-container">
+                <!-- Las secciones se generarán dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para contraseña -->
+    <div id="passwordModal" class="modal password-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🔒 Acceso al Modo Edición</h3>
+                <p>Ingrese la contraseña para acceder al modo edición</p>
+            </div>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Contraseña">
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="checkPassword()">Ingresar</button>
+                <button class="btn btn-danger" onclick="closePasswordModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar sección -->
+    <div id="addSectionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Agregar Nueva Sección</h3>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nombre de la Sección:</label>
+                <input type="text" id="sectionNameInput" class="form-input" placeholder="Ej: Marco Teórico">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="addSection()">Agregar</button>
+                <button class="btn btn-danger" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isEditMode = false;
+        const correctPassword = "Campeon#8";
+
+        let courseData = {
+            sections: [
+                {
+                    id: 1,
+                    name: "Fundamentos de la Investigación",
+                    materials: [
+                        {
+                            name: "Metodología de la Investigación - Hernández Sampieri",
+                            url: "https://ejemplo.com/hernandez-sampieri-metodologia"
+                        },
+                        {
+                            name: "Guía de Investigación Científica",
+                            url: "https://ejemplo.com/guia-investigacion-cientifica"
+                        }
+                    ],
+                    practices: [
+                        {
+                            name: "Práctica 1: Identificación de Problemas de Investigación",
+                            url: "https://ejemplo.com/practica-1-problemas"
+                        },
+                        {
+                            name: "Ejercicio: Formulación de Hipótesis",
+                            url: "https://ejemplo.com/ejercicio-hipotesis"
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Diseño de Investigación",
+                    materials: [
+                        {
+                            name: "Tipos de Diseño de Investigación",
+                            url: "https://ejemplo.com/tipos-diseno-investigacion"
+                        }
+                    ],
+                    practices: [
+                        {
+                            name: "Práctica 2: Diseño de un Proyecto de Investigación",
+                            url: "https://ejemplo.com/practica-diseno-proyecto"
+                        }
+                    ]
+                }
+            ]
+        };
+
+        function setViewMode() {
+            isEditMode = false;
+            document.body.className = 'view-mode';
+            updateModeButtons();
+        }
+
+        function setEditMode() {
+            isEditMode = true;
+            document.body.className = 'edit-mode';
+            updateModeButtons();
+        }
+
+        function updateModeButtons() {
+            const buttons = document.querySelectorAll('.mode-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (isEditMode) {
+                buttons[1].classList.add('active');
+            } else {
+                buttons[0].classList.add('active');
+            }
+        }
+
+        function showPasswordModal() {
+            document.getElementById('passwordModal').style.display = 'block';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === correctPassword) {
+                setEditMode();
+                closePasswordModal();
+                renderSections();
+            } else {
+                alert('Contraseña incorrecta');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function renderSections() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+
+            if (courseData.sections.length === 0) {
+                container.innerHTML = '<div class="empty-state">No hay secciones creadas. ¡Agrega tu primera sección!</div>';
+                return;
+            }
+
+            courseData.sections.forEach(section => {
+                const sectionElement = createSectionElement(section);
+                container.appendChild(sectionElement);
+            });
+        }
+
+        function createSectionElement(section) {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'section';
+            sectionDiv.innerHTML = `
+                <div class="section-header">
+                    <h3 class="section-title">${section.name}</h3>
+                    <button class="btn btn-danger edit-mode-only" onclick="deleteSection(${section.id})">🗑️ Eliminar</button>
+                </div>
+                <div class="section-content">
+                    <div class="materials-section">
+                        <h4 class="subsection-title">Materiales del Curso</h4>
+                        <ul class="material-list" id="materials-${section.id}">
+                            ${section.materials.map((material, index) => `
+                                <li class="material-item">
+                                    <div class="material-info">
+                                        <div class="material-details">
+                                            <div class="material-name">${material.name}</div>
+                                            <div class="material-url">${material.url}</div>
+                                        </div>
+                                        <div class="material-actions">
+                                            <a href="${material.url}" target="_blank" class="btn-link">📥 Acceder</a>
+                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${section.id}, 'materials', ${index})">✖</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div class="add-material-form edit-mode-only">
+                            <div class="form-row">
+                                <input type="text" class="material-input" placeholder="Nombre del material" id="material-name-${section.id}">
+                                <input type="url" class="material-input" placeholder="https://ejemplo.com/material" id="material-url-${section.id}">
+                            </div>
+                            <button class="btn btn-success" onclick="addMaterial(${section.id}, 'materials')">➕ Agregar Material</button>
+                        </div>
+                    </div>
+                    <div class="practices-section">
+                        <h4 class="subsection-title">Prácticas</h4>
+                        <ul class="material-list" id="practices-${section.id}">
+                            ${section.practices.map((practice, index) => `
+                                <li class="material-item">
+                                    <div class="material-info">
+                                        <div class="material-details">
+                                            <div class="material-name">${practice.name}</div>
+                                            <div class="material-url">${practice.url}</div>
+                                        </div>
+                                        <div class="material-actions">
+                                            <a href="${practice.url}" target="_blank" class="btn-link">📥 Acceder</a>
+                                            <button class="btn btn-danger edit-mode-only" onclick="removeMaterial(${section.id}, 'practices', ${index})">✖</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div class="add-material-form edit-mode-only">
+                            <div class="form-row">
+                                <input type="text" class="material-input" placeholder="Nombre de la práctica" id="practice-name-${section.id}">
+                                <input type="url" class="material-input" placeholder="https://ejemplo.com/practica" id="practice-url-${section.id}">
+                            </div>
+                            <button class="btn btn-success" onclick="addMaterial(${section.id}, 'practices')">➕ Agregar Práctica</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return sectionDiv;
+        }
+
+        function showAddSectionModal() {
+            if (!isEditMode) return;
+            document.getElementById('addSectionModal').style.display = 'block';
+            document.getElementById('sectionNameInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('addSectionModal').style.display = 'none';
+            document.getElementById('sectionNameInput').value = '';
+        }
+
+        function addSection() {
+            const nameInput = document.getElementById('sectionNameInput');
+            const name = nameInput.value.trim();
+            
+            if (!name) {
+                alert('Por favor, ingresa un nombre para la sección');
+                return;
+            }
+
+            const newSection = {
+                id: Date.now(),
+                name: name,
+                materials: [],
+                practices: []
+            };
+
+            courseData.sections.push(newSection);
+            renderSections();
+            closeModal();
+        }
+
+        function deleteSection(sectionId) {
+            if (!isEditMode) return;
+            if (confirm('¿Estás seguro de que deseas eliminar esta sección?')) {
+                courseData.sections = courseData.sections.filter(section => section.id !== sectionId);
+                renderSections();
+            }
+        }
+
+        function addMaterial(sectionId, type) {
+            if (!isEditMode) return;
+            
+            const nameInput = document.getElementById(`${type === 'materials' ? 'material' : 'practice'}-name-${sectionId}`);
+            const urlInput = document.getElementById(`${type === 'materials' ? 'material' : 'practice'}-url-${sectionId}`);
+            
+            const name = nameInput.value.trim();
+            const url = urlInput.value.trim();
+            
+            if (!name || !url) {
+                alert('Por favor, ingresa tanto el nombre como la URL');
+                return;
+            }
+
+            const section = courseData.sections.find(s => s.id === sectionId);
+            if (section) {
+                section[type].push({ name, url });
+                nameInput.value = '';
+                urlInput.value = '';
+                renderSections();
+            }
+        }
+
+        function removeMaterial(sectionId, type, index) {
+            if (!isEditMode) return;
+            const section = courseData.sections.find(s => s.id === sectionId);
+            if (section) {
+                section[type].splice(index, 1);
+                renderSections();
+            }
+        }
+
+        function exportData() {
+            if (!isEditMode) return;
+            const dataStr = JSON.stringify(courseData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'taller-investigacion-1.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                closePasswordModal();
+            }
+        });
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (e.target.id === 'passwordInput') {
+                    checkPassword();
+                } else if (e.target.id === 'sectionNameInput') {
+                    addSection();
+                }
+            }
+        });
+
+        // Cerrar modales al hacer clic fuera
+        document.getElementById('addSectionModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.getElementById('passwordModal').addEventListener('click', function(e) {
+            if (e.target === this) closePasswordModal();
+        });
+
+        // Inicializar la aplicación en modo visualización
+        setViewMode();
+        renderSections();
+    </script>
+</body>
+</html>
