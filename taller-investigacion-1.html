@@ -5,19 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Taller de Investigación 1 - Gestor de Curso</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
       padding: 20px;
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -27,7 +21,6 @@
       overflow: hidden;
       backdrop-filter: blur(10px);
     }
-
     .header {
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: white;
@@ -35,178 +28,66 @@
       text-align: center;
       position: relative;
     }
-
     .header h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
-
-    .header p {
-      font-size: 1.2em;
-      opacity: 0.9;
-    }
-
-    .main-content {
-      padding: 30px;
-    }
-
-    .sections-container {
-      display: grid;
-      gap: 25px;
-    }
-
+    .header p { font-size: 1.2em; opacity: 0.9; }
+    .main-content { padding: 30px; }
+    .sections-container { display: grid; gap: 25px; }
     .section {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
+      background: white; border-radius: 15px; padding: 25px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      border: 2px solid #f8f9fa;
-      transition: all 0.3s ease;
+      border: 2px solid #f8f9fa; transition: all 0.3s ease;
     }
-
     .section:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
       border-color: #3498db;
     }
-
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #ecf0f1;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #ecf0f1;
     }
-
-    .section-title {
-      font-size: 1.5em;
-      color: #2c3e50;
-      font-weight: 700;
-    }
-
-    .toggle-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .toggle-btn {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      background: #ecf0f1;
-      transition: all 0.3s ease;
-    }
-
-    .toggle-btn.active {
-      background: linear-gradient(135deg, #3498db, #2980b9);
-      color: white;
-    }
-
+    .section-title { font-size: 1.5em; color: #2c3e50; font-weight: 700; }
     .subsection-title {
-      font-size: 1.2em;
-      color: #34495e;
-      margin-bottom: 15px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 1.2em; color: #34495e; margin-bottom: 15px; font-weight: 600;
+      display: flex; align-items: center; gap: 10px;
     }
-
-    .subsection-title::before {
-      content: "📚";
-      font-size: 1.2em;
-    }
-
+    .subsection-title::before { content: "📚"; font-size: 1.2em; }
     .unit-container {
-      margin-bottom: 25px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 8px;
-      border: 1px solid #e9ecef;
+      margin-bottom: 25px; padding: 15px; background: rgba(255, 255, 255, 0.7);
+      border-radius: 8px; border: 1px solid #e9ecef;
     }
-
     .unit-title {
-      font-size: 1.1em;
-      color: #495057;
-      margin-bottom: 12px;
-      font-weight: 600;
-      padding: 8px 12px;
-      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-      border-radius: 6px;
-      border-left: 3px solid #6c757d;
+      font-size: 1.1em; color: #495057; margin-bottom: 12px; font-weight: 600;
+      padding: 8px 12px; background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 6px; border-left: 3px solid #6c757d;
     }
-
-    .material-list {
-      list-style: none;
-      margin-bottom: 15px;
-    }
-
+    .material-list { list-style: none; margin-bottom: 15px; }
     .material-item {
-      background: white;
-      margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s ease;
+      background: white; margin-bottom: 15px; padding: 15px; border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); transition: all 0.2s ease;
     }
-
-    .material-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
+    .material-item:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .material-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
     }
-
-    .material-details {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .material-name {
-      font-weight: 600;
-      color: #2c3e50;
-      font-size: 14px;
-    }
-
-    .material-actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
+    .material-details { flex: 1; min-width: 200px; }
+    .material-name { font-weight: 600; color: #2c3e50; font-size: 14px; }
+    .material-actions { display: flex; gap: 8px; align-items: center; }
     .btn-link {
       background: linear-gradient(135deg, #9b59b6, #8e44ad);
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 12px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
+      color: white; padding: 8px 16px; text-decoration: none; display: inline-block;
+      font-size: 12px; border-radius: 6px; transition: all 0.3s ease;
     }
-
-    .btn-link:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
-    }
-
-    .btn-link.disabled {
-      background: gray;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
+    .btn-link:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(155,89,182,0.3); }
+    .btn-link.disabled { background: gray; cursor: not-allowed; pointer-events: none; }
+    /* Etiquetas de los dos botones */
+    .btn-material::before { content: "📥 "; }
+    .btn-practica::before { content: "🧪 "; }
   </style>
 </head>
 <body>
@@ -222,7 +103,7 @@
   </div>
 
   <script>
-    // Datos del curso
+    // === Datos del curso (igual que antes, separados) ===
     const courseData = {
       sections: [
         {
@@ -234,29 +115,41 @@
                 name: "Semana 01: Líneas de investigación y detección de problemas",
                 url: "https://1drv.ms/b/c/6a3e014cfc3ac3fa/EdB5_4jvLExClhOkWqACxzQBTPQg0l0FrUy-RFsU3hD19A?e=YxdGm4"
               },
-              {
-                name: "Semana 02: Selección y delimitación del problema",
-                url: ""
-              }
+              { name: "Semana 02: Selección y delimitación del problema", url: "" }
             ]
           },
           practices: {
             unidad1: [
-              {
-                name: "Práctica 01: Análisis de un problema de investigación",
-                url: ""
-              },
-              {
-                name: "Práctica 02: Revisión de fuentes",
-                url: "https://example.com/practica2"
-              }
+              { name: "Práctica 01: Análisis de un problema de investigación", url: "" },
+              { name: "Práctica 02: Revisión de fuentes", url: "https://example.com/practica2" }
             ]
           }
         }
       ]
     };
 
-    let activeType = 'materials'; // por defecto se muestran los materiales
+    // Combina materials y practices por índice dentro de cada unidad
+    function buildUnifiedUnits(section) {
+      const unified = {};
+      for (let i = 1; i <= 4; i++) {
+        const key = `unidad${i}`;
+        const mats = (section.materials && section.materials[key]) || [];
+        const prcs = (section.practices && section.practices[key]) || [];
+        const len = Math.max(mats.length, prcs.length);
+        unified[key] = Array.from({ length: len }).map((_, idx) => {
+          const m = mats[idx] || {};
+          const p = prcs[idx] || {};
+          // Preferimos el nombre del material; si no hay, usamos el de práctica; si no, un genérico
+          const name = m.name || p.name || `Ítem ${idx + 1}`;
+          return {
+            name,
+            materialUrl: m.url || "",
+            practicaUrl: p.url || ""
+          };
+        });
+      }
+      return unified;
+    }
 
     function renderSections() {
       const container = document.getElementById('sections-container');
@@ -266,19 +159,16 @@
         const sectionDiv = document.createElement('div');
         sectionDiv.className = 'section';
 
-        const unitsHtml = createUnitsHtml(section.id, activeType, section[activeType]);
+        const unifiedUnits = buildUnifiedUnits(section);
+        const unitsHtml = createUnitsHtml(unifiedUnits);
 
         sectionDiv.innerHTML = `
           <div class="section-header">
             <h3 class="section-title">${section.name}</h3>
-            <div class="toggle-buttons">
-              <button class="toggle-btn ${activeType === 'materials' ? 'active' : ''}" onclick="switchType('materials')">Material</button>
-              <button class="toggle-btn ${activeType === 'practices' ? 'active' : ''}" onclick="switchType('practices')">Práctica</button>
-            </div>
           </div>
           <div class="section-content">
             <div class="materials-section">
-              <h4 class="subsection-title">${activeType === 'materials' ? 'Materiales del Curso' : 'Prácticas del Curso'}</h4>
+              <h4 class="subsection-title">Material</h4>
               ${unitsHtml}
             </div>
           </div>
@@ -287,13 +177,11 @@
       });
     }
 
-    function createUnitsHtml(sectionId, type, unitsData) {
+    function createUnitsHtml(unitsData) {
       let html = '';
-
       for (let i = 1; i <= 4; i++) {
         const unidadKey = `unidad${i}`;
-        const items = (unitsData && unitsData[unidadKey]) || [];
-
+        const items = unitsData[unidadKey] || [];
         html += `
           <div class="unit-container">
             <h5 class="unit-title">📖 Unidad ${i}</h5>
@@ -305,9 +193,12 @@
                       <div class="material-name">${item.name}</div>
                     </div>
                     <div class="material-actions">
-                      ${item.url 
-                        ? `<a href="${item.url}" target="_blank" class="btn-link">📥 Acceder</a>` 
-                        : `<span class="btn-link disabled">📥 Acceder</span>`}
+                      ${item.materialUrl
+                        ? `<a href="${item.materialUrl}" target="_blank" class="btn-link btn-material">Material</a>`
+                        : `<span class="btn-link disabled btn-material">Material</span>`}
+                      ${item.practicaUrl
+                        ? `<a href="${item.practicaUrl}" target="_blank" class="btn-link btn-practica">Práctica</a>`
+                        : `<span class="btn-link disabled btn-practica">Práctica</span>`}
                     </div>
                   </div>
                 </li>
@@ -317,11 +208,6 @@
         `;
       }
       return html;
-    }
-
-    function switchType(type) {
-      activeType = type;
-      renderSections();
     }
 
     renderSections();
