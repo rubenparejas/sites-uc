@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva: El Corazón de la Tesis</title>
+    <title>Resultados de Investigación: Caso Huancayo 2024</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- MathJax para renderizar fórmulas LaTeX -->
     <script>
         window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true
+            },
+            options: {
+                renderActions: {
+                    addMenu: []
+                }
             }
         };
     </script>
@@ -23,28 +27,7 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-        }
-
-        .step-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar {
-            transition: width 0.5s ease-in-out;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            -webkit-font-smoothing: antialiased;
         }
 
         .tab-content {
@@ -53,260 +36,254 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
-        /* Estilo para que MathJax no rompa el diseño */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .mjx-container {
-            display: inline-block !important;
-            margin: 0 2px !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+            max-width: 100%;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
 
-    <!-- Header -->
-    <header class="bg-indigo-900 text-white py-12 px-6 text-center shadow-lg">
-        <h1 class="text-4xl font-bold mb-4">Resultados de Investigación</h1>
-        <p class="text-indigo-200 max-w-2xl mx-auto text-lg leading-relaxed">
-            Bienvenido, investigador. Aquí aprenderás a transformar datos crudos en conocimiento científico. 
-            Sigue este itinerario para que tu tesis brille con luz propia.
-        </p>
+    <header class="bg-indigo-900 text-white shadow-2xl relative">
+        <div class="max-w-5xl mx-auto px-6 py-12 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-2">Resultados de Investigación</h1>
+                    <p class="text-indigo-200 text-lg font-light">Estructura y Presentación de Hallazgos Científicos</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 max-w-sm">
+                    <p class="text-xs uppercase font-bold text-indigo-300 mb-2 tracking-widest">Hipótesis de Trabajo</p>
+                    <p class="text-sm italic">"El liderazgo transformacional influye positiva y significativamente en el compromiso organizacional (Sede Huancayo, 2024)"</p>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-12">
         
-        <!-- Progress Tracker -->
-        <div class="mb-12">
-            <div class="flex justify-between mb-2 text-sm font-semibold text-indigo-700 uppercase tracking-wider">
-                <span>Tu Progreso en el Itinerario</span>
-                <span id="progress-text">20%</span>
+        <div class="mb-12 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-sm font-bold text-indigo-700 uppercase tracking-widest">Itinerario de Resultados</span>
+                <span id="progress-text" class="text-2xl font-black text-indigo-900">20%</span>
             </div>
-            <div class="w-full bg-slate-200 rounded-full h-3">
-                <div id="progress-bar" class="progress-bar bg-indigo-600 h-3 rounded-full" style="width: 20%"></div>
+            <div class="w-full bg-slate-100 rounded-full h-4 p-1 shadow-inner">
+                <div id="progress-bar" class="progress-bar bg-gradient-to-r from-indigo-500 to-indigo-700 h-2 rounded-full" style="width: 20%"></div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="flex flex-wrap gap-2 mb-8 justify-center">
-            <button onclick="showTab(1, 20)" class="tab-btn active px-6 py-2 rounded-full border-2 border-indigo-600 bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition" id="btn-1">1. Cimientos</button>
-            <button onclick="showTab(2, 40)" class="tab-btn px-6 py-2 rounded-full border-2 border-indigo-200 text-indigo-700 font-medium hover:border-indigo-400 transition" id="btn-2">2. El Retrato</button>
-            <button onclick="showTab(3, 60)" class="tab-btn px-6 py-2 rounded-full border-2 border-indigo-200 text-indigo-700 font-medium hover:border-indigo-400 transition" id="btn-3">3. La Prueba</button>
-            <button onclick="showTab(4, 80)" class="tab-btn px-6 py-2 rounded-full border-2 border-indigo-200 text-indigo-700 font-medium hover:border-indigo-400 transition" id="btn-4">4. El Diálogo</button>
-            <button onclick="showTab(5, 100)" class="tab-btn px-6 py-2 rounded-full border-2 border-indigo-200 text-indigo-700 font-medium hover:border-indigo-400 transition" id="btn-5">5. La Huella</button>
-        </div>
+        <nav class="flex flex-wrap gap-3 mb-10 justify-center">
+            <button onclick="showTab(1, 20)" class="tab-btn active px-5 py-3 rounded-xl border-2 border-indigo-600 bg-indigo-600 text-white font-bold text-sm shadow-md transition-all" id="btn-1">1. Cimientos</button>
+            <button onclick="showTab(2, 40)" class="tab-btn px-5 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm transition-all" id="btn-2">2. El Retrato</button>
+            <button onclick="showTab(3, 60)" class="tab-btn px-5 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm transition-all" id="btn-3">3. La Prueba</button>
+            <button onclick="showTab(4, 80)" class="tab-btn px-5 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm transition-all" id="btn-4">4. El Diálogo</button>
+            <button onclick="showTab(5, 100)" class="tab-btn px-5 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-bold text-sm transition-all" id="btn-5">5. La Huella</button>
+        </nav>
 
-        <!-- Content Sections -->
-        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 min-h-[500px]">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 p-8 md:p-14 min-h-[500px]">
             
-            <!-- SECCIÓN 1: LIMPIEZA -->
             <section id="tab-1" class="tab-content active">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="flex-1">
-                        <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-md text-xs font-bold uppercase">Paso 1: Preparación</span>
-                        <h2 class="text-3xl font-bold mt-4 mb-6">Limpieza y Calidad: Asegurando el Cimiento</h2>
-                        <p class="text-slate-600 mb-6 italic">"No se puede construir una catedral sobre arena movediza. Antes de analizar, debemos purificar."</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <div class="bg-green-100 p-1 rounded-full mt-1">
-                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                </div>
-                                <div><strong class="text-slate-900">Outliers:</strong> Identifica datos atípicos que pueden distorsionar tu realidad.</div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-green-100 p-1 rounded-full mt-1">
-                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                </div>
-                                <div><strong class="text-slate-900">Confiabilidad:</strong> ¿Tu instrumento mide siempre lo mismo? ($\alpha$ de Cronbach).</div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-green-100 p-1 rounded-full mt-1">
-                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                </div>
-                                <div><strong class="text-slate-900">Normalidad:</strong> Pruebas de bondad de ajuste para decidir el camino estadístico.</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full md:w-80 bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-6 text-center">
-                        <div class="text-4xl mb-4">🧹</div>
-                        <p class="text-sm text-slate-500">Imagina que estás filtrando agua. El análisis solo será tan puro como el proceso de filtrado previo.</p>
+                <div class="max-w-3xl mx-auto">
+                    <div class="inline-block bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-xs font-black uppercase mb-4 tracking-tighter">Fase 1: Confiabilidad</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6 tracking-tight">Cimientos y Calidad de Datos</h2>
+                    <p class="text-slate-600 mb-8 text-lg">Validación técnica de los instrumentos antes del análisis de variables.</p>
+                    
+                    <div class="bg-indigo-50 border-l-8 border-indigo-500 p-8 rounded-r-2xl shadow-sm">
+                        <h4 class="text-indigo-900 font-bold mb-4 flex items-center gap-2 text-xl">Ejemplo: Alfa de Cronbach</h4>
+                        <p class="text-sm text-slate-700 mb-6">Resultados de consistencia interna para la Sede Huancayo:</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-xl border border-indigo-100 shadow-sm">
+                                <p class="text-xs text-slate-400 font-bold uppercase mb-2">Variable: Liderazgo</p>
+                                <p class="text-3xl font-black text-indigo-600">$\alpha = 0.912$</p>
+                                <p class="text-xs mt-2 text-green-600 font-bold">Excelente</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl border border-indigo-100 shadow-sm">
+                                <p class="text-xs text-slate-400 font-bold uppercase mb-2">Variable: Compromiso</p>
+                                <p class="text-3xl font-black text-indigo-600">$\alpha = 0.885$</p>
+                                <p class="text-xs mt-2 text-green-600 font-bold">Bueno</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 2: DESCRIPTIVA -->
             <section id="tab-2" class="tab-content">
-                <div class="flex flex-col md:flex-row items-center gap-8 text-left">
-                    <div class="flex-1">
-                        <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-md text-xs font-bold uppercase">Paso 2: Caracterización</span>
-                        <h2 class="text-3xl font-bold mt-4 mb-6">El Retrato de la Muestra</h2>
-                        <p class="text-slate-600 mb-6">Aquí le contamos al lector quiénes son nuestros sujetos de estudio sin juzgar, solo describiendo la realidad encontrada.</p>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="p-4 border border-slate-100 rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-indigo-900 mb-2">Tablas APA 7</h4>
-                                <p class="text-xs text-slate-500">Líneas horizontales, sin líneas verticales. Claridad absoluta.</p>
-                            </div>
-                            <div class="p-4 border border-slate-100 rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-indigo-900 mb-2">Evita la Redundancia</h4>
-                                <p class="text-xs text-slate-500">Si el dato está en la tabla, no lo repitas tal cual en el texto. ¡Interprétalo!</p>
-                            </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="inline-block bg-amber-100 text-amber-700 px-4 py-1 rounded-full text-xs font-black uppercase mb-4 tracking-tighter">Fase 2: Descriptiva</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6">El Retrato de la Realidad</h2>
+                    <p class="text-slate-600 mb-10 text-lg">Caracterización sociodemográfica y niveles de las variables de estudio.</p>
+                    
+                    <div class="bg-amber-50 border-l-8 border-amber-500 p-8 rounded-r-2xl shadow-sm">
+                        <h4 class="text-amber-900 font-bold mb-6 text-xl text-center">Niveles de Compromiso Organizacional (n=75)</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left border-collapse bg-white rounded-xl overflow-hidden shadow-md">
+                                <thead class="bg-amber-100 text-amber-900">
+                                    <tr>
+                                        <th class="p-5 border-b font-bold uppercase">Nivel</th>
+                                        <th class="p-5 border-b text-center font-bold uppercase">Frecuencia (f)</th>
+                                        <th class="p-5 border-b text-center font-bold uppercase">Porcentaje (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-amber-50 transition">
+                                        <td class="p-5 border-b font-semibold">Alto</td>
+                                        <td class="p-5 border-b text-center">52</td>
+                                        <td class="p-5 border-b text-center font-bold">69.3%</td>
+                                    </tr>
+                                    <tr class="hover:bg-amber-50 transition">
+                                        <td class="p-5 border-b">Medio</td>
+                                        <td class="p-5 border-b text-center">18</td>
+                                        <td class="p-5 border-b text-center">24.0%</td>
+                                    </tr>
+                                    <tr class="bg-rose-50/30">
+                                        <td class="p-5 text-rose-600">Bajo</td>
+                                        <td class="p-5 text-center">5</td>
+                                        <td class="p-5 text-center">6.7%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div class="w-full md:w-96">
-                        <div class="bg-white p-4 border border-slate-200 rounded-xl shadow-sm">
-                            <div class="flex items-end gap-2 h-40">
-                                <div class="bg-indigo-400 w-12 h-2/3 rounded-t"></div>
-                                <div class="bg-indigo-600 w-12 h-full rounded-t"></div>
-                                <div class="bg-indigo-300 w-12 h-1/2 rounded-t"></div>
-                                <div class="bg-indigo-500 w-12 h-3/4 rounded-t"></div>
-                            </div>
-                            <div class="mt-4 text-center text-xs font-bold text-slate-400">Distribución de Frecuencias</div>
+                        <div class="mt-8 p-6 bg-white/50 rounded-xl border border-amber-200">
+                            <h5 class="text-amber-900 font-bold mb-2">Interpretación Académica:</h5>
+                            <p class="text-slate-700 leading-relaxed italic">
+                                "En la sede Huancayo, casi siete de cada diez colaboradores administrativos (69.3%) reportan un nivel alto de compromiso, lo cual indica una fuerte identificación con los valores de la organización."
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 3: HIPÓTESIS -->
             <section id="tab-3" class="tab-content">
                 <div class="text-center max-w-3xl mx-auto">
-                    <span class="bg-rose-100 text-rose-700 px-3 py-1 rounded-md text-xs font-bold uppercase">Paso 3: Validación</span>
-                    <h2 class="text-3xl font-bold mt-4 mb-4">Contrastación de Hipótesis</h2>
-                    <p class="text-slate-600 mb-10">Es el momento de la verdad. ¿Nuestras sospechas eran ciertas o el azar nos engañó?</p>
+                    <div class="inline-block bg-rose-100 text-rose-700 px-4 py-1 rounded-full text-xs font-black uppercase mb-4 tracking-tighter">Fase 3: Inferencial</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6">Contrastación de Hipótesis</h2>
+                    <p class="text-slate-600 mb-12 text-lg">Pruebas estadísticas para validar la influencia entre variables.</p>
                     
-                    <div class="bg-indigo-900 text-white p-8 rounded-2xl mb-8 relative overflow-hidden shadow-inner">
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold mb-6 border-b border-indigo-700 pb-4 tracking-wide uppercase">Criterio de Decisión Estadístico</h3>
-                            <div class="flex flex-col md:flex-row justify-around items-center gap-8">
-                                <div class="text-center p-4 bg-indigo-800/50 rounded-xl border border-indigo-700 w-full md:w-5/12">
-                                    <div class="text-4xl font-bold text-rose-400 mb-2">$p < 0.05$</div>
-                                    <p class="text-sm font-semibold mb-2">Significancia Estadística</p>
-                                    <p class="text-xs text-indigo-200">Rechazamos la Hipótesis Nula ($H_0$). Existe evidencia suficiente.</p>
-                                </div>
-                                <div class="text-indigo-500 text-2xl font-bold hidden md:block">vs</div>
-                                <div class="text-center p-4 bg-indigo-800/30 rounded-xl border border-indigo-800 w-full md:w-5/12">
-                                    <div class="text-4xl font-bold text-slate-400 mb-2">$p \geq 0.05$</div>
-                                    <p class="text-sm font-semibold mb-2">No Significativo</p>
-                                    <p class="text-xs text-indigo-300">Mantenemos la Hipótesis Nula ($H_0$). El efecto se debe al azar.</p>
-                                </div>
+                    <div class="bg-indigo-950 text-white rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                        <h3 class="text-amber-400 font-black text-2xl mb-10 uppercase tracking-widest border-b border-white/10 pb-4">Resultado: Coeficiente Rho de Spearman</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10">
+                            <div class="bg-white/5 p-8 rounded-2xl border border-white/10">
+                                <p class="text-xs text-indigo-300 font-bold mb-3 uppercase">Grado de Correlación</p>
+                                <p class="text-6xl font-black">$\rho = 0.785$</p>
+                                <p class="text-sm mt-4 text-indigo-200">Positiva y Alta</p>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-2xl border border-white/10">
+                                <p class="text-xs text-indigo-300 font-bold mb-3 uppercase">Significancia ($p$)</p>
+                                <p class="text-6xl font-black">$0.000$</p>
+                                <p class="text-sm mt-4 text-indigo-200">Sig. $< 0.05$</p>
                             </div>
                         </div>
-                        <div class="absolute top-0 right-0 opacity-10 text-8xl -mr-10 -mt-10">🔬</div>
-                    </div>
-
-                    <p class="text-sm text-slate-500 italic">"Recuerda: El p-valor mide la probabilidad de observar tus datos si la hipótesis nula fuera cierta."</p>
-                </div>
-            </section>
-
-            <!-- SECCIÓN 4: DISCUSIÓN -->
-            <section id="tab-4" class="tab-content">
-                <div class="flex flex-col md:flex-row gap-8 items-start">
-                    <div class="flex-1">
-                        <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-md text-xs font-bold uppercase">Paso 4: Interpretación</span>
-                        <h2 class="text-3xl font-bold mt-4 mb-6">La Discusión: El Diálogo con los Maestros</h2>
-                        <p class="text-slate-600 mb-6">Aquí no solo presentas datos, los defiendes y los comparas. Es la "Triangulación Científica".</p>
                         
-                        <div class="space-y-4">
-                            <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg">
-                                <h4 class="font-bold text-emerald-900">¿Por qué pasó esto?</h4>
-                                <p class="text-sm text-emerald-800">No solo digas que hay relación, explica la razón biológica, social o lógica detrás del hallazgo.</p>
-                            </div>
-                            <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
-                                <h4 class="font-bold text-blue-900">¿Qué dijeron otros?</h4>
-                                <p class="text-sm text-blue-800">Confronta tus resultados con los antecedentes nacionales e internacionales.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-80 flex flex-col gap-4">
-                        <div class="p-6 bg-slate-900 text-white rounded-2xl">
-                            <h4 class="text-amber-400 font-bold mb-2">Error Común:</h4>
-                            <p class="text-sm italic">Repetir los mismos cuadros y números de la sección anterior. ¡La discusión es análisis!</p>
+                        <div class="p-6 bg-emerald-500/10 border-2 border-emerald-400/30 rounded-2xl">
+                            <p class="text-xl font-bold">Decisión Estadística: Se rechaza la Hipótesis Nula ($H_0$) y se acepta la Hipótesis del Investigador ($H_i$).</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 5: CONCLUSIONES -->
-            <section id="tab-5" class="tab-content">
-                <div class="text-center max-w-3xl mx-auto">
-                    <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-md text-xs font-bold uppercase">Paso 5: El Legado</span>
-                    <h2 class="text-3xl font-bold mt-4 mb-4">Conclusiones y Recomendaciones</h2>
-                    <p class="text-slate-600 mb-8">El resumen final de tu aporte al mundo del conocimiento.</p>
+            <section id="tab-4" class="tab-content">
+                <div class="max-w-4xl mx-auto">
+                    <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-xs font-black uppercase mb-4 tracking-tighter">Fase 4: Análisis Crítico</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6">Discusión de Resultados</h2>
+                    <p class="text-slate-600 mb-10 text-lg">Diálogo entre los hallazgos propios y la literatura científica existente.</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                        <div class="p-6 rounded-xl border-2 border-purple-100 hover:border-purple-300 transition cursor-default">
-                            <h4 class="text-purple-900 font-bold mb-3 flex items-center gap-2">
-                                <span>🎯</span> Conclusiones
-                            </h4>
-                            <p class="text-sm text-slate-600">Respuesta directa a tus objetivos. Son síntesis teórica, no repetición de datos estadísticos.</p>
-                        </div>
-                        <div class="p-6 rounded-xl border-2 border-indigo-100 hover:border-indigo-300 transition cursor-default">
-                            <h4 class="text-indigo-900 font-bold mb-3 flex items-center gap-2">
-                                <span>💡</span> Recomendaciones
-                            </h4>
-                            <p class="text-sm text-slate-600">Sugerencias viables para la práctica o para futuras líneas de investigación.</p>
+                    <div class="bg-emerald-50 border-l-8 border-emerald-500 p-10 rounded-r-3xl shadow-sm">
+                        <h4 class="text-emerald-900 font-bold mb-6 text-xl">Contraste con Antecedentes</h4>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm leading-relaxed text-slate-700 space-y-6 italic border border-emerald-100">
+                            <p>
+                                "Los resultados obtenidos en Huancayo corroboran lo planteado por <strong>García (2022)</strong>, quien determinó que el carisma del líder predice el compromiso afectivo. Sin embargo, en nuestro estudio la correlación hallada es significativamente superior ($\rho = 0.785$ frente al $0.620$ de García)."
+                            </p>
+                            <p>
+                                "Esta disparidad sugiere que en la Sede Huancayo el factor cultural y la proximidad en el liderazgo transformacional generan un vínculo emocional más profundo con la organización que en contextos metropolitanos."
+                            </p>
                         </div>
                     </div>
-
-                    <button onclick="window.location.reload()" class="mt-12 bg-indigo-600 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-200 transition">
-                        Reiniciar Aprendizaje
-                    </button>
                 </div>
             </section>
 
-        </div>
+            <section id="tab-5" class="tab-content">
+                <div class="max-w-4xl mx-auto">
+                    <div class="inline-block bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-xs font-black uppercase mb-4 tracking-tighter">Fase 5: Síntesis</div>
+                    <h2 class="text-4xl font-black text-slate-900 mb-6">Conclusiones y Recomendaciones</h2>
+                    <p class="text-slate-600 mb-12 text-lg">Aportes finales y sugerencias de mejora basadas en la evidencia.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 text-left">
+                        <div class="p-10 rounded-3xl bg-purple-50 border border-purple-200 shadow-sm relative overflow-hidden">
+                            <h4 class="text-purple-900 font-black mb-6 uppercase text-xs tracking-widest border-b border-purple-200 pb-2">Conclusión General</h4>
+                            <p class="text-slate-800 font-medium leading-relaxed">
+                                El liderazgo transformacional constituye un pilar estratégico en la Sede Huancayo, demostrando una influencia directa sobre el compromiso del personal; por tanto, optimizar las capacidades inspiracionales de los jefes incrementará la retención del talento administrativo.
+                            </p>
+                        </div>
 
-        <!-- Practical Tip Box -->
-        <div class="mt-12 bg-white rounded-2xl border border-slate-200 p-8 flex flex-col md:flex-row items-center gap-8">
-            <div class="text-5xl">🎓</div>
-            <div>
-                <h3 class="text-xl font-bold text-slate-900 mb-2">Consejo de tu Tutor</h3>
-                <p class="text-slate-600 leading-relaxed">
-                    Un buen investigador no es quien encuentra solo lo que esperaba, sino quien tiene la honestidad de reportar lo que la evidencia realmente dice. Tus resultados son el mayor aporte de tu tesis.
-                </p>
-            </div>
+                        <div class="p-10 rounded-3xl bg-indigo-50 border border-indigo-200 shadow-sm relative overflow-hidden">
+                            <h4 class="text-indigo-900 font-black mb-6 uppercase text-xs tracking-widest border-b border-indigo-200 pb-2">Recomendación Práctica</h4>
+                            <p class="text-slate-800 font-medium leading-relaxed">
+                                Ejecutar un programa de capacitación en "Liderazgo Inspiracional" para los jefes de departamento de Huancayo, enfocado en el desarrollo de la estimulación intelectual y la consideración individualizada de sus equipos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
     </main>
 
-    <footer class="py-12 text-center text-slate-400 text-sm border-t border-slate-100 mt-12">
-        &copy; 2026 Itinerario del Tesista | Educación para la Investigación Científica
+    <footer class="py-12 border-t border-slate-200 bg-white text-center">
+        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest italic">
+            Área de Investigación - Desarrollo de Tesis 2024
+        </p>
     </footer>
 
     <script>
         function showTab(tabNum, progress) {
-            // Update ProgressBar
             const progressBar = document.getElementById('progress-bar');
             const progressText = document.getElementById('progress-text');
             progressBar.style.width = progress + '%';
             progressText.innerText = progress + '%';
 
-            // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
 
-            // Show current tab
             const activeTab = document.getElementById('tab-' + tabNum);
             activeTab.classList.add('active');
 
-            // Re-render math content with MathJax
-            if (window.MathJax) {
+            if (window.MathJax && window.MathJax.typesetPromise) {
                 MathJax.typesetPromise();
             }
 
-            // Update buttons styling
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach((btn, index) => {
-                if (index + 1 === tabNum) {
-                    btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
-                    btn.classList.remove('border-indigo-200', 'text-indigo-700', 'bg-indigo-100', 'border-indigo-100');
-                } else if (index + 1 < tabNum) {
+                const btnIdx = index + 1;
+                if (btnIdx === tabNum) {
+                    btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+                    btn.classList.remove('border-slate-200', 'text-slate-600', 'bg-indigo-100');
+                } else if (btnIdx < tabNum) {
                     btn.classList.add('bg-indigo-100', 'border-indigo-100', 'text-indigo-800');
                     btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
                 } else {
-                    btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600', 'bg-indigo-100', 'border-indigo-100');
-                    btn.classList.add('border-indigo-200', 'text-indigo-700');
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600', 'bg-indigo-100', 'border-indigo-100', 'shadow-md');
+                    btn.classList.add('border-slate-200', 'text-slate-600');
                 }
+            });
+
+            window.scrollTo({
+                top: document.querySelector('nav').offsetTop - 20,
+                behavior: 'smooth'
             });
         }
     </script>
