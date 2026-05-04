@@ -1,0 +1,202 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario TOGAF - Arquitectura Empresarial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-active {
+            background-color: #2563eb !important;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgb(37 99 235 / 0.4);
+        }
+
+        .option-hover:hover {
+            border-color: #3b82f6;
+            background-color: #f8faff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+
+    <!-- Encabezado Institucional -->
+    <header class="w-full max-w-5xl text-center mb-8">
+        <h1 class="text-3xl font-bold text-slate-800 mb-2">Arquitectura Empresarial (TOGAF)</h1>
+        <p class="text-slate-500 italic text-sm">Repositorio de Evaluación Académica - Ingeniería y Arquitectura</p>
+        <div class="h-1 w-20 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+    </header>
+
+    <main class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Navegación por Índices (Menú Lateral) -->
+        <nav class="md:col-span-3 lg:col-span-2">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 sticky top-8">
+                <h2 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">Navegación</h2>
+                <div id="tabs-container" class="grid grid-cols-5 md:grid-cols-2 gap-2">
+                    <!-- Los botones se generan dinámicamente, el 0 es "Inicio" -->
+                </div>
+            </div>
+        </nav>
+
+        <!-- Área de Contenido Principal -->
+        <section class="md:col-span-9 lg:col-span-10">
+            <div id="display-card" class="bg-white p-6 md:p-12 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 min-h-[500px] flex flex-col justify-between fade-in">
+                
+                <!-- Contenido Dinámico: Bienvenida o Pregunta -->
+                <div id="dynamic-content">
+                    <!-- Inyectado por JavaScript -->
+                </div>
+
+                <!-- Barra de Acción Inferior -->
+                <div class="flex items-center justify-between mt-12 pt-6 border-t border-slate-100">
+                    <button onclick="navigate(-1)" id="prev-btn" class="flex items-center gap-2 text-slate-400 hover:text-blue-600 disabled:opacity-20 disabled:cursor-not-allowed transition-all font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        <span>Anterior</span>
+                    </button>
+                    
+                    <div id="indicator" class="px-4 py-1 bg-slate-50 rounded-full text-[11px] font-bold text-slate-400 uppercase tracking-tighter">
+                        <!-- Texto de progreso -->
+                    </div>
+
+                    <button onclick="navigate(1)" id="next-btn" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 disabled:opacity-20 disabled:cursor-not-allowed transition-all font-bold">
+                        <span id="next-label">Siguiente</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 mb-8 text-slate-400 text-[10px] uppercase tracking-widest text-center">
+        Material de uso exclusivo académico • Docencia e Investigación
+    </footer>
+
+    <script>
+        // Estructura de datos: Índice 0 es la portada
+        const content = [
+            {
+                isHome: true,
+                title: "Introducción al Estándar TOGAF",
+                desc: "Esta plataforma interactiva contiene una serie de preguntas diseñadas para evaluar la comprensión del Método de Desarrollo de Arquitectura (ADM) y los componentes clave del estándar. Navegue a través de las cartillas para iniciar el análisis."
+            },
+            { id: 1, q: "¿Cuál de las siguientes frases describe mejor el estándar TOGAF?", options: ["A. Un marco de trabajo y método para el desarrollo de arquitectura", "B. Un patrón de arquitectura", "C. Un modelo de negocio", "D. Un método para desarrollar Arquitecturas Tecnológicas", "E. Un método para el Gobierno de TI"] },
+            { id: 2, q: "¿Qué parte del estándar TOGAF proporciona las fases de desarrollo de arquitectura junto con sus narrativas?", options: ["A. Parte I: Introducción", "B. Parte II: Método de Desarrollo de Arquitectura (ADM)", "C. Parte III: Guías y Técnicas del ADM", "D. Parte IV: Marco de Contenido de Arquitectura", "E. Parte V: Continuo de la Empresa y Herramientas"] },
+            { id: 3, q: "¿Cuál de las fases del ADM incluye el desarrollo de las Arquitecturas de Datos y de Aplicaciones?", options: ["A. Fase A", "B. Fase B", "C. Fase C", "D. Fase D", "E. Fase E"] },
+            { id: 4, q: "Es un resultado final que ha sido acordado previamente, que tiene un valor oficial para la organización y que necesita una aprobación formal (firma)...", options: ["A. Un artefacto", "B. Un bloque de construcción", "C. Un catálogo", "D. Un entregable", "E. Una matriz"] },
+            { id: 5, q: "Según el estándar TOGAF, ¿en qué fase del ADM ocurre la planificación inicial de la implementación?", options: ["A. Fase A: Visión de la Arquitectura", "B. Fase B: Arquitectura de Negocio", "C. Fase C: Arquitecturas de Sistemas de Información", "D. Fase D: Arquitectura Tecnológica", "E. Fase E: Oportunidades y Soluciones"] },
+            { id: 6, q: "¿Cuál es la razón por la que la primera ejecución de un ciclo ADM suele ser más difícil que los ciclos posteriores?", options: ["A. Porque la gerencia no está familiarizada con el proceso", "B. Porque hay pocos activos de arquitectura disponibles", "C. Por falta de gobierno", "D. Por insuficientes practicantes de arquitectura capacitados", "E. Porque la Arquitectura de Línea Base debe definirse completamente"] },
+            { id: 7, q: "¿Cómo sugiere TOGAF realizar el seguimiento de los cambios en entregables y productos de trabajo que se modifican en diversas fases?", options: ["A. Comité de control de cambios", "B. Puntos de control de documentos y bitácoras", "C. Sistema de publicación y suscripción", "D. Números de versión", "E. Sistema de gestión de flujo de trabajo"] },
+            { id: 8, q: "¿Cómo se denomina al componente que representa una funcionalidad potencialmente reutilizable para satisfacer necesidades de negocio?", options: ["A. Entregable contractual", "B. Artefacto de diseño", "C. Bloque de construcción", "D. Continuom de empresa"] },
+            { id: 9, q: "En la Fase D, ¿qué recurso del Repositorio de Arquitectura debe considerarse para el desarrollo de la Arquitectura Tecnológica?", options: ["A. Visión de la Arquitectura", "B. Reglas de negocio y descripciones de puestos", "C. Plan de Implementación y Migración", "D. Mapa de interesados", "E. Modelo de Referencia Técnica (TRM) de TOGAF"] },
+            { id: 10, q: "¿En qué fase del ADM se incluyen actividades para evaluar dependencias, costos y beneficios de los proyectos de migración?", options: ["A. Fase E", "B. Fase F", "C. Fase G", "D. Fase H", "E. Gestión de Requisitos"] },
+            { id: 11, q: "Complete la oración: La Fase A se inicia tras la recepción de ________.", options: ["A. La aprobación del Director de Información (CIO)", "B. Una directiva del Director Ejecutivo (CEO)", "C. Una Solicitud de Trabajo de Arquitectura de la organización patrocinadora", "D. El Plan de Implementación y Migración", "E. El documento de Análisis de Requisitos"] },
+            { id: 12, q: "¿En qué fase del ADM se realiza una evaluación inicial de la 'Preparación para la Transformación del Negocio'?", options: ["A. Fase Preliminar", "B. Fase A", "C. Fase B", "D. Fase E", "E. Fase F"] },
+            { id: 13, q: "¿Qué técnica recomienda TOGAF para identificar y comprender los requisitos que una arquitectura debe abordar?", options: ["A. Gestión de interesados", "B. Gestión de riesgos", "C. Análisis de brechas", "D. Escenarios de negocio", "E. Principios de arquitectura"] },
+            { id: 14, q: "¿Por qué debería establecerse una Junta de Arquitectura (Architecture Board) según el estándar?", options: ["A. Para realizar evaluaciones de desempeño del equipo", "B. Para realizar revisiones de diseño de código fuente", "C. Para asegurar que los nuevos sistemas se introduzcan mediante un proceso gestionado", "D. Para facilitar la adopción de tecnologías avanzadas", "E. Para supervisar la implementación de la estrategia de la empresa."] },
+            { id: 15, q: "Respecto al uso de 'Vistas' y 'Puntos de Vista', ¿cuál de las siguientes afirmaciones es correcta?", options: ["A. Una vista es la perspectiva de un interesado individual", "B. Un punto de vista es la perspectiva de un interesado individual", "C. Diferentes interesados siempre comparten las mismas vistas", "D. Diferentes interesados siempre comparten los mismos puntos de vista"] },
+            { id: 16, q: "¿Cuál de los siguientes es considerado por TOGAF como un atributo de un buen bloque de construcción?", options: ["A. Un bloque de construcción que es reutilizable", "B. Un bloque que cumple con las necesidades del negocio", "C. Un bloque con interfaces públicas", "D. Un bloque que guía el desarrollo de soluciones", "E. Un bloque que conoce el producto"] }
+        ];
+
+        let currentIndex = 0;
+
+        function init() {
+            renderTabs();
+            updateDisplay();
+        }
+
+        function renderTabs() {
+            const container = document.getElementById('tabs-container');
+            container.innerHTML = '';
+            content.forEach((item, index) => {
+                const btn = document.createElement('button');
+                btn.className = `p-2 rounded-lg text-xs font-bold transition-all border ${index === currentIndex ? 'nav-active border-blue-600' : 'text-slate-400 border-transparent hover:bg-slate-50 hover:text-slate-600'}`;
+                btn.innerText = index === 0 ? 'H' : item.id;
+                btn.onclick = () => {
+                    currentIndex = index;
+                    updateDisplay();
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function updateDisplay() {
+            const item = content[currentIndex];
+            const container = document.getElementById('dynamic-content');
+            const card = document.getElementById('display-card');
+            
+            // Animación de salida/entrada
+            card.classList.remove('fade-in');
+            void card.offsetWidth; // Trigger reflow
+            card.classList.add('fade-in');
+
+            if (item.isHome) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center text-center space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-full text-blue-600 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-800">${item.title}</h2>
+                        <p class="text-slate-500 leading-relaxed max-w-2xl text-lg">${item.desc}</p>
+                        <div class="pt-6">
+                             <button onclick="navigate(1)" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">Empezar Revisión</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('indicator').innerText = "Portada";
+                document.getElementById('next-label').innerText = "Iniciar";
+            } else {
+                container.innerHTML = `
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">Pregunta ${item.id}</span>
+                            <div class="h-[1px] flex-grow bg-slate-100"></div>
+                        </div>
+                        <h2 class="text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed">${item.q}</h2>
+                        <div class="grid gap-3 pt-4">
+                            ${item.options.map(opt => `
+                                <button class="option-hover w-full text-left p-4 rounded-xl border border-slate-200 text-slate-600 text-sm md:text-base transition-all flex items-start gap-3">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-slate-200 mt-2"></span>
+                                    <span>${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                document.getElementById('indicator').innerText = `Progreso: ${currentIndex} / ${content.length - 1}`;
+                document.getElementById('next-label').innerText = "Siguiente";
+            }
+
+            document.getElementById('prev-btn').disabled = currentIndex === 0;
+            document.getElementById('next-btn').disabled = currentIndex === content.length - 1;
+            renderTabs();
+        }
+
+        function navigate(dir) {
+            currentIndex += dir;
+            updateDisplay();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
+
+```
