@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma de Investigación - Sistema de Pestañas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tab-btn.active {
+            background-color: #1e40af;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-900 pb-12">
+
+    <header class="bg-white border-b mb-8">
+        <div class="max-w-5xl mx-auto px-6 py-8">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-blue-100 text-blue-800 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold">Investigación Académica II</h1>
+                    <p class="text-slate-500">Cronograma de Resultados, Discusión y Conclusiones</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6">
+        <div class="flex overflow-x-auto gap-2 pb-4 mb-8 custom-scrollbar">
+            <button onclick="showTab(9)" id="btn-9" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap active">Semana 9</button>
+            <button onclick="showTab(10)" id="btn-10" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 10</button>
+            <button onclick="showTab(11)" id="btn-11" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 11</button>
+            <button onclick="showTab(12)" id="btn-12" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 12</button>
+            <button onclick="showTab(13)" id="btn-13" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 13</button>
+            <button onclick="showTab(14)" id="btn-14" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 14</button>
+            <button onclick="showTab(15)" id="btn-15" class="tab-btn px-6 py-3 rounded-full bg-white border border-slate-200 text-sm font-semibold hover:bg-slate-100 transition-all whitespace-nowrap">Semana 15</button>
+        </div>
+
+        <div id="content-container">
+            
+            <!-- Semana 9 -->
+            <div id="tab-9" class="tab-content active">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-blue-600 font-bold uppercase tracking-widest text-sm">Fase de Preparación</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Organización y Limpieza de Resultados</h2>
+                        </div>
+                        <div class="px-4 py-2 bg-blue-50 rounded-lg text-blue-700 text-sm font-medium border border-blue-100">
+                            Fase Inicial del Semestre
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="flex items-center gap-2 text-lg font-bold text-slate-800 mb-3">
+                                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Objetivo Central
+                                </h3>
+                                <p class="text-slate-600 leading-relaxed">Que el estudiante prepare correctamente sus datos antes de redactar, asegurando la integridad y coherencia de la base de datos.</p>
+                            </div>
+                            <div>
+                                <h3 class="flex items-center gap-2 text-lg font-bold text-slate-800 mb-3">
+                                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                                    Actividades Principales
+                                </h3>
+                                <ul class="space-y-2 text-slate-600">
+                                    <li class="flex items-start gap-2"><span>•</span> Revisión de instrumentos aplicados.</li>
+                                    <li class="flex items-start gap-2"><span>•</span> Verificación de datos incompletos.</li>
+                                    <li class="flex items-start gap-2"><span>•</span> Codificación y organización en Excel/SPSS/R.</li>
+                                    <li class="flex items-start gap-2"><span>•</span> Identificación de variables, dimensiones e indicadores.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Productos de Clase
+                                </h3>
+                                <ul class="text-sm space-y-2 text-emerald-900 opacity-80 font-medium">
+                                    <li>✓ Base de datos ordenada.</li>
+                                    <li>✓ Matriz de variables final.</li>
+                                    <li>✓ Tabla preliminar de resultados.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                                <h3 class="text-amber-800 font-bold mb-2 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                    Actividad Dinámica
+                                </h3>
+                                <p class="text-sm text-amber-900 leading-relaxed italic">"Detective de errores": Los estudiantes intercambian bases de datos y buscan inconsistencias o vacíos de información.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 10 -->
+            <div id="tab-10" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-indigo-600 font-bold uppercase tracking-widest text-sm">Fase de Visualización</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Elaboración de Tablas y Gráficos</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-800 mb-3">Objetivo</h3>
+                                <p class="text-slate-600">Transformar datos brutos en evidencia visual clara y profesional.</p>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-800 mb-3">Actividades</h3>
+                                <ul class="space-y-2 text-slate-600">
+                                    <li class="flex items-start gap-2"><span>•</span> Construcción de tablas descriptivas y gráficos.</li>
+                                    <li><span>•</span> Aplicación de Normas APA para tablas y figuras.</li>
+                                    <li><span>•</span> Elección del gráfico según tipo de variable.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3">Producto</h3>
+                                <p class="text-sm text-emerald-900 font-medium italic">"Banco de tablas y gráficos listos para la tesis."</p>
+                            </div>
+                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                                <h3 class="text-amber-800 font-bold mb-2">Actividad Dinámica</h3>
+                                <p class="text-sm text-amber-900 leading-relaxed italic">"Antes y después": Comparación crítica entre gráficos mal diseñados y gráficos académicos bajo normas internacionales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 11 -->
+            <div id="tab-11" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-blue-700 font-bold uppercase tracking-widest text-sm">Fase de Escritura</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Redacción de Resultados Descriptivos</h2>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-800 mb-3">Objetivo</h3>
+                                <p class="text-slate-600">Aprender a narrar resultados con objetividad, sin sesgos de interpretación prematura.</p>
+                            </div>
+                            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                                <h4 class="font-bold mb-2 text-blue-800">Conceptos Clave:</h4>
+                                <p class="text-sm text-slate-600">Diferencia fundamental entre describir, interpretar y discutir hallazgos.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-indigo-50 rounded-2xl p-6 border border-indigo-100">
+                                <h3 class="text-indigo-800 font-bold mb-3">Ejercicio Práctico</h3>
+                                <p class="text-sm text-indigo-900 font-medium">Transformación de datos en párrafos: "El 68% de estudiantes mostró..."</p>
+                            </div>
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3">Producto</h3>
+                                <p class="text-sm text-emerald-900 font-medium">Primer borrador del Capítulo de Resultados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 12 -->
+            <div id="tab-12" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-red-600 font-bold uppercase tracking-widest text-sm">Fase Estadística</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Resultados Inferenciales</h2>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-800 mb-3">Objetivo</h3>
+                                <p class="text-slate-600">Interpretar y validar pruebas estadísticas correctamente para la toma de decisiones.</p>
+                            </div>
+                            <div class="space-y-3">
+                                <h4 class="font-bold text-slate-700">Temas Clave:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold">p-valor</span>
+                                    <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold">Significancia</span>
+                                    <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold">Hipótesis</span>
+                                    <span class="bg-slate-100 px-3 py-1 rounded text-xs font-bold">T-Student / ANOVA</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                                <h3 class="text-amber-800 font-bold mb-2">Actividad Dinámica</h3>
+                                <p class="text-sm text-amber-900 leading-relaxed italic">"Juicio Estadístico": Cada grupo defiende si una hipótesis se acepta o rechaza basándose en sus resultados.</p>
+                            </div>
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3">Producto</h3>
+                                <p class="text-sm text-emerald-900 font-medium">Sección inferencial redactada y validada.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 13 -->
+            <div id="tab-13" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-purple-600 font-bold uppercase tracking-widest text-sm">Fase Dialógica</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Construcción de la Discusión</h2>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <h3 class="text-lg font-bold text-slate-800">Estructura Sugerida</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm leading-none">1</div>
+                                    <p class="text-sm text-slate-600">Hallazgo encontrado.</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm leading-none">2</div>
+                                    <p class="text-sm text-slate-600">Comparación con autor previo.</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm leading-none">3</div>
+                                    <p class="text-sm text-slate-600">Explicación posible e implicancia.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                                <h3 class="text-amber-800 font-bold mb-2">Dinámica: Mesa de Investigadores</h3>
+                                <p class="text-sm text-amber-900 italic leading-relaxed">El estudiante defiende su resultado frente a artículos previos como si estuviera en un congreso real.</p>
+                            </div>
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3">Producto</h3>
+                                <p class="text-sm text-emerald-900 font-medium">Primer borrador completo de la discusión.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 14 -->
+            <div id="tab-14" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                        <div>
+                            <span class="text-slate-600 font-bold uppercase tracking-widest text-sm">Fase de Cierre</span>
+                            <h2 class="text-3xl font-extrabold mt-1">Conclusiones y Recomendaciones</h2>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <h3 class="text-lg font-bold text-slate-800">Lo que NO debes hacer:</h3>
+                            <ul class="space-y-2 text-sm text-red-600 font-medium">
+                                <li class="flex items-center gap-2">✕ Repetir resultados literalmente.</li>
+                                <li class="flex items-center gap-2">✕ Introducir datos nuevos que no se analizaron.</li>
+                                <li class="flex items-center gap-2">✕ Escribir opiniones personales sin base.</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100">
+                                <h3 class="text-amber-800 font-bold mb-2">Dinámica</h3>
+                                <p class="text-sm text-amber-900 italic">"Conclusión débil vs sólida": Taller de edición colaborativa.</p>
+                            </div>
+                            <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+                                <h3 class="text-emerald-800 font-bold mb-3">Producto</h3>
+                                <p class="text-sm text-emerald-900 font-medium">Conclusiones finales y recomendaciones aplicadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana 15 -->
+            <div id="tab-15" class="tab-content">
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 border-2 border-emerald-200">
+                    <div class="text-center mb-10">
+                        <span class="bg-emerald-100 text-emerald-800 px-4 py-1 rounded-full font-bold text-xs uppercase tracking-widest">Meta Final</span>
+                        <h2 class="text-4xl font-extrabold mt-4">Integración y Revisión Final</h2>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-8 rounded-3xl mb-8">
+                        <h3 class="font-bold text-xl mb-6 text-center">Unificando el Discurso Científico</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                            <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                                <div class="text-emerald-600 font-bold text-2xl mb-2">1</div>
+                                <p class="text-sm font-semibold">Coherencia Integral</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                                <div class="text-emerald-600 font-bold text-2xl mb-2">2</div>
+                                <p class="text-sm font-semibold">Redacción Académica</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                                <div class="text-emerald-600 font-bold text-2xl mb-2">3</div>
+                                <p class="text-sm font-semibold">Simulación de Defensa</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-600 text-white p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">¡Misión Cumplida!</h4>
+                            <p class="opacity-90">Capítulos completos y presentación oral lista para la sustentación.</p>
+                        </div>
+                        <div class="bg-white/20 px-6 py-4 rounded-xl text-center backdrop-blur-sm">
+                            <span class="block text-xs uppercase font-bold mb-1">Actividad Dinámica</span>
+                            <span class="font-bold">Sustentación Final (Semana 16)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function showTab(weekNumber) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active'));
+
+            // Desactivar todos los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            // Activar la pestaña seleccionada
+            document.getElementById('tab-' + weekNumber).classList.add('active');
+            document.getElementById('btn-' + weekNumber).classList.add('active');
+
+            // Scroll suave hacia arriba si estamos en móvil
+            if (window.innerWidth < 768) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
